@@ -12,7 +12,7 @@
         <title>E-Shop</title>
     </head>
     <body>
-        <h1>Welcome to our shop</h1>
+        <h1>Welcome to Å och N</h1>
     </p>
     <a href= "getitems"> See inventory</a> 
     </body>
