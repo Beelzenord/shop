@@ -13,9 +13,10 @@
     </head>
     <body>
         <h1>Welcome to the E-Shop</h1>
-        <form action ="BusinessLogic" method = "get">
-            Username : <input type ="text" name ="username"/><br/>
-            Password : <input type = "password" name ="password"><br/>
-            <input type ="submit" value = "OK">
+          <form  method ="get" action="loginvalidation.jsp">
+            Enter the word: <input type="text" name="username" required><br/>
+            Enter the password: <input type = "password" name="password" required><br/>
+            <input type="submit" value = "falk">
     </body>
+   
 </html>
