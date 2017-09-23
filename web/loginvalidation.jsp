@@ -20,9 +20,17 @@
                  out.println(pass);
                  User u = new User(user,pass);
                  out.println("here is " + u.getUsername());
-                 
+                 RequestDispatcher rd;
                  u.initConection();
-                 out.println(u.isUserConnected());
+                 if(u.isUserConnected()){
+                     rd = request.getRequestDispatcher("mainservices.jsp");
+                     rd.forward(request, response);
+                 }
+                 else{
+                     rd = request.getRequestDispatcher("LoginPage.jsp");
+                     rd.forward(request, response);
+                 }
+                
             %>
     </body>
 </html>
