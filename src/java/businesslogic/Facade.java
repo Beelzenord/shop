@@ -7,6 +7,7 @@ package businesslogic;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
 import java.sql.Connection;
+import java.util.Hashtable;
 
 
 /**
@@ -23,5 +24,17 @@ public class Facade {
         return con;
        
       
+    }
+    
+    public static Hashtable getItems() {
+        LookItems look = new LookItems();
+        Hashtable table = look.getItemsWithGroup("hej");
+        System.out.println("table: " + table.toString());
+        for (int i = 0; i < (int)table.get("size"); i++) {
+            Hashtable tmp = (Hashtable)table.get("Item"+i);
+            System.out.println("name: " + tmp.get("name"));
+            System.out.println("price: " + tmp.get("price"));
+        }
+        return table;
     }
 }
