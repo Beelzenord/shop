@@ -4,6 +4,7 @@
     Author     : fauzianordlund
 --%>
 
+<%@page import="businesslogic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,11 @@
     <body>
         <h1>Welcome to Å och N</h1>
     </p>
-    <a href= "getitems"> See inventory</a> 
+    <a href= "getitems"> See inventory</a>
+    <br/>
+    <% //RequestDispatcher ds = request.getRequestDispatcher("index.html"); 
+    //ds.forward(request, response);
+    
+    %>
     </body>
 </html>

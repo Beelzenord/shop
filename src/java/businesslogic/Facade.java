@@ -7,7 +7,13 @@ package businesslogic;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -18,12 +24,11 @@ public class Facade {
     public static String example(){
        return "this will connect to a database";
     }
-    public static Connection isValid(Connection con){
+    private static Connection isValid(Connection con){
         
-        con = ValidateUser.Connect(con);
+        //con = null;
         return con;
        
-      
     }
     
     public static Hashtable getItems() {
@@ -36,5 +41,10 @@ public class Facade {
             System.out.println("price: " + tmp.get("price"));
         }
         return table;
+    }
+    public static User getUserCredentials(String username,String password){
+      User u = null;
+      u = ValidateUser.validateClient(username, password);
+       return u;
     }
 }
