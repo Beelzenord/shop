@@ -5,6 +5,7 @@
  */
 package Database;
 
+import businesslogic.Shoe;
 import businesslogic.Shoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,10 +22,10 @@ import java.util.logging.Logger;
  * @author Niklas
  */
 
-public class ShoesDB extends Shoes {
+public class ShoesDB extends Shoe {
     
-    private ShoesDB(int id, String name, String brand, int price, int rating, int stock) {
-        super(id, name, brand, price, rating, stock);
+    private ShoesDB(int id, String name, int price, int stock) {
+        super(id, name, price, stock);
     }
     
     public static Collection searchItems(String group, Connection con) {
@@ -41,18 +42,16 @@ public class ShoesDB extends Shoes {
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select * from T_Shoes");
+            rs = st.executeQuery("select * from shoeClass");
         } catch (SQLException ex) {
         }
         try {
             while (rs.next()) {
-                int i = rs.getInt("shoesId");
-                String itemName = rs.getString("itemName");
-                String brand = rs.getString("brand");
-                int price = rs.getInt("price");
-                int rating = rs.getInt("rating");
-                int stock = rs.getInt("stock");
-                v.addElement(new ShoesDB(i, itemName, brand, price, rating, stock));
+                int i = rs.getInt(1);
+                String itemName = rs.getString(2);
+                int price = rs.getInt(3);
+                int stock = rs.getInt(4);
+                v.addElement(new ShoesDB(i, itemName, price, stock));
             }
         } catch (SQLException ex) {
         }

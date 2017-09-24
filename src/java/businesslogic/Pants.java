@@ -11,8 +11,8 @@ package businesslogic;
  */
 public class Pants extends Item{
     
-    public Pants(int id, String name, int price) {
-        super(id, name, price);
+    public Pants(int id, String name, int price, int stock) {
+        super(id, name, price, stock);
     }
     
 }

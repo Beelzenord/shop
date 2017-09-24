@@ -20,19 +20,17 @@ public class LookShoes {
     }
     
     public Hashtable getShoesWithGroup(String s, Connection con) {
-        Collection c = Shoes.searchItems(s, con);
+        Collection c = Shoe.searchItems(s, con);
         Hashtable t = new Hashtable();
         t.put("size", c.size());
         Iterator it = c.iterator();
         for (int i = 0; it.hasNext(); i++) {
             Hashtable items = new Hashtable();
-            Shoes anewitem = (Shoes)it.next();
-            items.put("name", anewitem.getItemName());
-            items.put("brand", anewitem.getBrand());
+            Shoe anewitem = (Shoe)it.next();
+            items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
-            items.put("rating", anewitem.getRating());
             items.put("stock", anewitem.getStock());
-            t.put("Shoes"+i, items);
+            t.put("Shoe"+i, items);
         }
         return t;
     }

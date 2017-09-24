@@ -5,14 +5,23 @@
  */
 package businesslogic;
 
+import Database.ShirtDB;
+import Database.ShoesDB;
+import java.sql.Connection;
+import java.util.Collection;
+
 /**
  *
  * @author fauzianordlund
  */
 public class Shoe extends Item{
     
-    public Shoe(int id, String name, int price) {
-        super(id, name, price);
+    static public Collection searchItems(String group, Connection con) {
+        return ShoesDB.searchItems(group, con);
+    }
+    
+    public Shoe(int id, String name, int price, int stock) {
+        super(id, name, price, stock);
     }
     
 }

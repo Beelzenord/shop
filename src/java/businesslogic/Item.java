@@ -5,6 +5,8 @@
  */
 package businesslogic;
 
+import Database.ItemDB;
+import java.sql.Connection;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -16,19 +18,22 @@ public class Item {
     private int id;
     private String name;
     private int price;
-    static public Collection searchItems(String group) {
-        Vector v = new Vector();
-        /** Adding dummy items instead of calling database **/
-        v.addElement(new Item(4, "thefirstitem", 8));
-        v.addElement(new Item(9, "seconditem", 7));
-        return v;
-    }
-    
-    protected Item(int id , String name, int price) {
+    private int stock;
+    /*static public Collection searchItems(String group, Connection con) {
+        return ItemDB.searchItems(group, con);
+    }*/
+
+    public Item(int id, String name, int price, int stock) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.stock = stock;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -37,7 +42,9 @@ public class Item {
         return price;
     }
 
-    public int getId() {
-        return id;
+    public int getStock() {
+        return stock;
     }
+    
+    
 }

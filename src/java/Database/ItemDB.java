@@ -20,40 +20,42 @@ import java.util.logging.Logger;
  *
  * @author Niklas
  */
-public class DBItem extends Item {
+public class ItemDB extends Item {
     
-    private DBItem(int id, String name, int price) {
-        super(id, name, price);
+    private ItemDB(int id, String name, int price, int stock) {
+        super(id, name, price, stock);
     }
     
-    /** Not using this currently **/
-    public static Collection searchItems(String group) {
+    public static Collection searchItems(String group, Connection con) {
         Vector v = new Vector();
-        Connection con = null;
+        /*Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kTunes?useSSL=false", "asd", "asd");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useSSL=false", "admin1", "admin1p");
         } catch (SQLException ex) {
-        }
+        }*/
         Statement st = null;
         try {
             st = con.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(DBItem.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select item_id, name from Item where item_group = "+group);
+            rs = st.executeQuery("select * from " + group);
         } catch (SQLException ex) {
         }
         try {
             while (rs.next()) {
-                int i = rs.getInt("item_id");
-                String name = rs.getString("name");
-                int p = rs.getInt("price");
-                v.addElement(new DBItem(i, name, p));
+                int i = rs.getInt(1);
+                String itemName = rs.getString(2);
+                int price = rs.getInt(3);
+                int stock = rs.getInt(4);
+                v.addElement(new ItemDB(i, itemName, price, stock));
             }
         } catch (SQLException ex) {
         }
         return v;
     }
+    
+    
 }
+

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class Main {
     public static void main(String[] args) {
         Facade logic = new Facade();
-        //logic.getShoes();
+        User u = Facade.getUserCredentials("u1", "u1");
+        logic.getShoes("hej", u.getCon());
     }
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package businesslogic;
+import java.sql.Connection;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -17,8 +18,8 @@ public class LookItems {
     public LookItems() {
     }
     
-    public Hashtable getItemsWithGroup(String s) {
-        Collection c = Item.searchItems(s);
+    public Hashtable getItemsWithGroup(String group, Connection con) {
+        Collection c = null; //Item.searchItems(group, con);
         Hashtable t = new Hashtable();
         t.put("size", c.size());
         Iterator it = c.iterator();
@@ -27,6 +28,7 @@ public class LookItems {
             Item anewitem = (Item)it.next();
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
+            items.put("stock", anewitem.getStock());
             t.put("Item"+i, items);
         }
         return t;

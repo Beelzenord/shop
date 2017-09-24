@@ -20,22 +20,19 @@
         
         <%
             String username = (String)session.getAttribute("Name");
-            String pass = (String)session.getAttribute("Password");
-            User newU = new User(username, pass);
-            newU.initConection();
+            String password = (String)session.getAttribute("Password");
+            User u = Facade.getUserCredentials(username, password);
             
-            Hashtable table = Facade.getShoes(newU.getCon());
+            Hashtable table = Facade.getShoes("hej", u.getCon());
         %>
         <table>
             <%
                 for (int i = 0; i < (int)table.get("size"); i++) {
-                    Hashtable tmp = (Hashtable)table.get("Shoes"+i);
+                    Hashtable tmp = (Hashtable)table.get("Shoe"+i);
             %>
             <tr>
             <td> name </td> <td> <%= tmp.get("name")%></td> 
-            <td> brand </td> <td> <%= tmp.get("brand")%></td> 
             <td> price </td> <td> <%= tmp.get("price")%></td> 
-            <td> rating </td> <td> <%= tmp.get("rating")%></td> 
             <td> stock </td> <td> <%= tmp.get("stock")%></td> 
             </tr>
             <% } %>

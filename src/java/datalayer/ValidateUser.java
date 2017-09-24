@@ -55,7 +55,7 @@ public class ValidateUser {
         try {
              Class.forName("com.mysql.jdbc.Driver");
 
-                con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false","root","root");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false",username,password);
  
             ps = con.prepareStatement("select * from user where username=? and password=?");
             ps.setString(1, username);

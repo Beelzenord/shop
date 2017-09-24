@@ -5,6 +5,7 @@
  */
 package Database;
 
+import businesslogic.Shirt;
 import businesslogic.Shoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,19 +20,19 @@ import java.util.Vector;
  * @author Niklas
  */
 
-public class ShirtDB extends Shoes {
+public class ShirtDB extends Shirt {
     
-    private ShirtDB(int id, String name, String brand, int price, int rating, int stock) {
-        super(id, name, brand, price, rating, stock);
+    private ShirtDB(int id, String name,  int price,  int stock) {
+        super(id, name, price, stock);
     }
     
-    public static Collection searchItems(String group) {
+    public static Collection searchItems(String group, Connection con) {
         Vector v = new Vector();
-        Connection con = null;
+        /*Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useSSL=false", "admin1", "admin1p");
         } catch (SQLException ex) {
-        }
+        }*/
         Statement st = null;
         try {
             st = con.createStatement();
@@ -39,18 +40,16 @@ public class ShirtDB extends Shoes {
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select * from T_Shirt");
+            rs = st.executeQuery("select * from shirtClass");
         } catch (SQLException ex) {
         }
         try {
             while (rs.next()) {
-                int i = rs.getInt("shirtId");
-                String itemName = rs.getString("itemName");
-                String brand = rs.getString("brand");
-                int price = rs.getInt("price");
-                int rating = rs.getInt("rating");
-                int stock = rs.getInt("stock");
-                v.addElement(new ShirtDB(i, itemName, brand, price, rating, stock));
+                int i = rs.getInt(1);
+                String itemName = rs.getString(2);
+                int price = rs.getInt(3);
+                int stock = rs.getInt(4);
+                v.addElement(new ShirtDB(i, itemName, price, stock));
             }
         } catch (SQLException ex) {
         }
