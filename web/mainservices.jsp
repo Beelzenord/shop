@@ -14,6 +14,6 @@
     <body>
         <h1>Welcome to our shop</h1>
     </p>
-    <a href= "getitems"> See inventory</a> 
+    <a href= "getitems.jsp"> See inventory</a> 
     </body>
 </html>

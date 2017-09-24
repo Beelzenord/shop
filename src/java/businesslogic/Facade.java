@@ -18,9 +18,9 @@ public class Facade {
     public static String example(){
        return "this will connect to a database";
     }
-    public static Connection isValid(Connection con){
+    public static Connection isValid(Connection con, String user, String pass){
         
-        con = ValidateUser.Connect(con);
+        con = ValidateUser.Connect(con, user, pass);
         return con;
        
       
@@ -32,6 +32,18 @@ public class Facade {
         System.out.println("table: " + table.toString());
         for (int i = 0; i < (int)table.get("size"); i++) {
             Hashtable tmp = (Hashtable)table.get("Item"+i);
+            System.out.println("name: " + tmp.get("itemName"));
+            System.out.println("price: " + tmp.get("price"));
+        }
+        return table;
+    }
+    
+    public static Hashtable getShoes(Connection con) {
+        LookShoes look = new LookShoes();
+        Hashtable table = look.getShoesWithGroup("hej", con);
+        System.out.println("table: " + table.toString());
+        for (int i = 0; i < (int)table.get("size"); i++) {
+            Hashtable tmp = (Hashtable)table.get("Shoes"+i);
             System.out.println("name: " + tmp.get("name"));
             System.out.println("price: " + tmp.get("price"));
         }

@@ -5,7 +5,7 @@
  */
 package Database;
 
-import businesslogic.Item;
+import businesslogic.Shoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,40 +20,47 @@ import java.util.logging.Logger;
  *
  * @author Niklas
  */
-public class DBItem extends Item {
+
+public class ShoesDB extends Shoes {
     
-    private DBItem(int id, String name, int price) {
-        super(id, name, price);
+    private ShoesDB(int id, String name, String brand, int price, int rating, int stock) {
+        super(id, name, brand, price, rating, stock);
     }
     
-    /** Not using this currently **/
-    public static Collection searchItems(String group) {
+    public static Collection searchItems(String group, Connection con) {
         Vector v = new Vector();
-        Connection con = null;
+        /*Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/kTunes?useSSL=false", "asd", "asd");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useSSL=false", "admin1", "admin1p");
         } catch (SQLException ex) {
-        }
+        }*/
         Statement st = null;
         try {
             st = con.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(DBItem.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select item_id, name from Item where item_group = "+group);
+            rs = st.executeQuery("select * from T_Shoes");
         } catch (SQLException ex) {
         }
         try {
             while (rs.next()) {
-                int i = rs.getInt("item_id");
-                String name = rs.getString("name");
-                int p = rs.getInt("price");
-                v.addElement(new DBItem(i, name, p));
+                int i = rs.getInt("shoesId");
+                String itemName = rs.getString("itemName");
+                String brand = rs.getString("brand");
+                int price = rs.getInt("price");
+                int rating = rs.getInt("rating");
+                int stock = rs.getInt("stock");
+                v.addElement(new ShoesDB(i, itemName, brand, price, rating, stock));
             }
         } catch (SQLException ex) {
         }
         return v;
     }
 }
+
+
+
+
+

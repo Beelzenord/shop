@@ -12,7 +12,7 @@ import java.sql.Connection;
  * @author fauzianordlund
  */
 public class User {
-      private String username;
+    private String username;
     private String password;
     private Connection con;
     public User(String username, String password){
@@ -44,7 +44,7 @@ public class User {
         this.con = con;
     }
     public void initConection(){
-        this.con = Facade.isValid(con);
+        this.con = Facade.isValid(con, username, password);
     }
     public boolean isUserConnected(){
         if(this.con!=null){

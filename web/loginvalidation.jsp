@@ -23,6 +23,8 @@
                  RequestDispatcher rd;
                  u.initConection();
                  if(u.isUserConnected()){
+                     session.setAttribute("Name", user);
+                     session.setAttribute("Password", pass);
                      rd = request.getRequestDispatcher("mainservices.jsp");
                      rd.forward(request, response);
                  }

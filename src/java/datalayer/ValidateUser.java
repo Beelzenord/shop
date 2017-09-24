@@ -19,10 +19,10 @@ import javax.sql.DataSource;
  */
 public class ValidateUser {
   
-    public static Connection Connect(Connection con) {
+    public static Connection Connect(Connection con, String user, String pass) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?autoReconnect=true&useSSL=false", user, pass);
             System.out.println("Connection granted");
             return con;
         }
