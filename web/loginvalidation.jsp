@@ -4,6 +4,8 @@
     Author     : fauzianordlund
 --%>
 
+<%@page import="businesslogic.Facade"%>
+<%@page import="businesslogic.Visitor"%>
 <%@page import="businesslogic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,24 +15,29 @@
         <title>Login Validation</title>
     </head>
     <body>
+    
+    
         <%
                  String user=request.getParameter("username");
                  String pass=request.getParameter("password");
                  out.println(user);
                  out.println(pass);
-                 User u = new User(user,pass);
-                 out.println("here is " + u.getUsername());
-                 RequestDispatcher rd;
-                 u.initConection();
+                 User u = Facade.getUserCredentials( user, pass);
+                 out.println("fine so far");
+                 out.println(u.getUsername());
+                 
+                ServletRequest sr;
+                ServletResponse rs;
+               
+                
                  if(u.isUserConnected()){
                      session.setAttribute("Name", user);
                      session.setAttribute("Password", pass);
-                     rd = request.getRequestDispatcher("mainservices.jsp");
-                     rd.forward(request, response);
+                   RequestDispatcher RD = request.getRequestDispatcher("mainservices.jsp");
+                   RD.forward(request, response);
                  }
                  else{
-                     rd = request.getRequestDispatcher("LoginPage.jsp");
-                     rd.forward(request, response);
+                     out.println("sd");
                  }
                 
             %>

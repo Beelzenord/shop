@@ -6,58 +6,21 @@
 package businesslogic;
 
 import Database.ShirtDB;
+import Database.ShoesDB;
+import java.sql.Connection;
 import java.util.Collection;
 
 /**
  *
- * @author Niklas
+ * @author fauzianordlund
  */
-
-public class Shirt {
-    private int id;
-    private String itemName;
-    private String brand;
-    private int price;
-    private int rating;
-    private int stock;
+public class Shirt extends Item{
     
-    static public Collection searchItems(String group) {
-        return ShirtDB.searchItems(group);
-    }
-
-    public Shirt(int id, String name, String brand, int price, int rating, int stock) {
-        this.id = id;
-        this.itemName = name;
-        this.brand = brand;
-        this.price = price;
-        this.rating = rating;
-        this.stock = stock;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public int getStock() {
-        return stock;
+    static public Collection searchItems(String group, Connection con) {
+        return ShirtDB.searchItems(group, con);
     }
     
-    
-
+    public Shirt(int id, String name, int price, int stock) {
+        super(id, name, price, stock);
+    }
 }

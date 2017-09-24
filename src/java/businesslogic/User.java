@@ -12,14 +12,30 @@ import java.sql.Connection;
  * @author fauzianordlund
  */
 public class User {
+    int id;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
     private Connection con;
+    public User(){
+        
+    }
     public User(String username, String password){
         this.username = username;
         this.password = password;
     }
 
+    public User(int id, String username, String password, String firstName, String lastName, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -43,9 +59,10 @@ public class User {
     public void setCon(Connection con) {
         this.con = con;
     }
-    public void initConection(){
-        this.con = Facade.isValid(con, username, password);
-    }
+
+    /*  public void initConection(){
+        this.con = Facade.isValid(con);
+    }*/
     public boolean isUserConnected(){
         if(this.con!=null){
             return true;
@@ -54,4 +71,10 @@ public class User {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", con=" + con + '}';
+    }
+    
 }
