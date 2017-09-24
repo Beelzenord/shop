@@ -30,7 +30,7 @@ public class LookShoes {
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
             items.put("stock", anewitem.getStock());
-            t.put("Shoe"+i, items);
+            t.put("Item"+i, items);
         }
         return t;
     }

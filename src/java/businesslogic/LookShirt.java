@@ -31,7 +31,7 @@ public class LookShirt {
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
             items.put("stock", anewitem.getStock());
-            t.put("Shirt"+i, items);
+            t.put("Item"+i, items);
         }
         return t;
     }

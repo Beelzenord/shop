@@ -15,29 +15,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>H1 stuff</h1>
-        <h2>contents</h2>
-        
-        <%
-            String username = (String)session.getAttribute("Name");
-            String password = (String)session.getAttribute("Password");
-            User u = Facade.getUserCredentials(username, password);
-            
-            Hashtable table = Facade.getShoes("hej", u.getCon());
-        %>
-        <table>
-            <%
-                for (int i = 0; i < (int)table.get("size"); i++) {
-                    Hashtable tmp = (Hashtable)table.get("Shoe"+i);
-            %>
-            <tr>
-            <td> name </td> <td> <%= tmp.get("name")%></td> 
-            <td> price </td> <td> <%= tmp.get("price")%></td> 
-            <td> stock </td> <td> <%= tmp.get("stock")%></td> 
-            </tr>
-            <% } %>
-            
-        </table>
-        
+        <h1> Checkmark the items you want to find </h2>
+        <form method=get action="ShowTable.jsp">
+        <input type="checkbox" name="Shoes" value="Yes">Shoes<br>
+        <input type="checkbox" name="Shirt" value="Yes">Shirts<br>
+        <br><br>
+        <input type="submit" value="Search">
+        </form>
     </body>
 </html>
