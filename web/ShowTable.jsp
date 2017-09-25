@@ -36,17 +36,26 @@
         <%
             String username = (String)session.getAttribute("Name");
             String password = (String)session.getAttribute("Password");
-            User u = Facade.getUserCredentials("root", "root");
+            Facade facade = (Facade)session.getAttribute("Facade");
+            User u = facade.getUser();
             Hashtable table = new Hashtable();
-            for (int k = 0; k < 2; k++) {
+            for (int k = 0; k < 4; k++) {
                 table = null;
                 if (request.getParameter("Shoes") != null && k == 0) { 
-                    table = Facade.getShoes("hej", u.getCon()); %>
+                    table = facade.getShoes("hej", u.getCon()); %>
                     <h2>Shoes</h2>
                 <%}
-                if (request.getParameter("Shirt") != null && k == 1) { 
-                    table = Facade.getShirt("hej", u.getCon()); %>
+                if (request.getParameter("Shirts") != null && k == 1) { 
+                    table = facade.getShirts("hej", u.getCon()); %>
                     <h2>Shirts</h2>
+                <%}
+                if (request.getParameter("Gloves") != null && k == 2) { 
+                    table = facade.getGloves("hej", u.getCon()); %>
+                    <h2>Gloves</h2>
+                <%}
+                if (request.getParameter("Pants") != null && k == 3) { 
+                    table = facade.getPants("hej", u.getCon()); %>
+                    <h2>Pants</h2>
                 <% } if (table != null) { %>
                     <table>
                         <tr>

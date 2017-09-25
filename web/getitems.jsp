@@ -18,8 +18,11 @@
         <h1> Checkmark the items you want to find </h2>
         <form method=get action="ShowTable.jsp">
         <input type="checkbox" name="Shoes" value="Yes">Shoes<br>
-        <input type="checkbox" name="Shirt" value="Yes">Shirts<br>
-        <br><br>
+        <input type="checkbox" name="Shirts" value="Yes">Shirts<br>
+        <input type="checkbox" name="Gloves" value="Yes">Gloves<br>
+        <input type="checkbox" name="Pants" value="Yes">Pants<br>
+        
+        <br>
         <input type="submit" value="Search">
         </form>
     </body>

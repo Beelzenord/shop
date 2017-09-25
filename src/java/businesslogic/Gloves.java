@@ -5,12 +5,20 @@
  */
 package businesslogic;
 
+import Database.GlovesDB;
+import java.sql.Connection;
+import java.util.Collection;
+
 /**
  *
  * @author fauzianordlund
  */
 public class Gloves extends Item {
     
+        static public Collection searchItems(String group, Connection con) {
+        return GlovesDB.searchItems(group, con);
+    }
+        
     public Gloves(int id, String name, int price, int stock) {
         super(id, name, price, stock);
     }

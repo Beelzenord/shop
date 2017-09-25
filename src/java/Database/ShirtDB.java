@@ -6,7 +6,7 @@
 package Database;
 
 import businesslogic.Shirt;
-import businesslogic.Shoes;
+import businesslogic.ShoesTMp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

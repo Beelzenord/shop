@@ -14,19 +14,20 @@ import java.util.Iterator;
  *
  * @author Niklas
  */
-public class LookShoes {
+public class LookGloves {
 
-    public LookShoes() {
+    public LookGloves() {
     }
     
-    public Hashtable getShoesWithGroup(String s, Connection con) {
-        Collection c = Shoes.searchItems(s, con);
+        
+    public Hashtable getGlovesWithGroup(String group, Connection con) {
+        Collection c = Gloves.searchItems(group, con);
         Hashtable t = new Hashtable();
         t.put("size", c.size());
         Iterator it = c.iterator();
         for (int i = 0; it.hasNext(); i++) {
             Hashtable items = new Hashtable();
-            Shoes anewitem = (Shoes)it.next();
+            Gloves anewitem = (Gloves)it.next();
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
             items.put("stock", anewitem.getStock());

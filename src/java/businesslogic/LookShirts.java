@@ -15,9 +15,9 @@ import java.util.Iterator;
  * @author Niklas
  */
 
-public class LookShirt {
+public class LookShirts {
 
-    public LookShirt() {
+    public LookShirts() {
     }
     
     public Hashtable getShirtWithGroup(String group, Connection con) {

@@ -25,7 +25,10 @@
           session.setAttribute("Password", password);
           out.println(username);
           out.println(password);
-          User u = Facade.getUserCredentials(username, password);
+          Facade facade = new Facade();
+          facade.getUserCredentials(username, password);
+          User u = facade.getUser();
+          session.setAttribute("Facade", facade);
           out.println(u.toString());
           if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
               ds.forward(request, response);

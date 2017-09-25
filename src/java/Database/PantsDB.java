@@ -5,26 +5,21 @@
  */
 package Database;
 
-import businesslogic.Shoes;
-import businesslogic.ShoesTMp;
+import businesslogic.Pants;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Niklas
  */
-
-public class ShoesDB extends Shoes {
+public class PantsDB extends Pants {
     
-    private ShoesDB(int id, String name, int price, int stock) {
+    private PantsDB(int id, String name,  int price,  int stock) {
         super(id, name, price, stock);
     }
     
@@ -42,7 +37,7 @@ public class ShoesDB extends Shoes {
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select * from shoeClass");
+            rs = st.executeQuery("select * from pantsClass");
         } catch (SQLException ex) {
         }
         try {
@@ -51,15 +46,10 @@ public class ShoesDB extends Shoes {
                 String itemName = rs.getString(2);
                 int price = rs.getInt(3);
                 int stock = rs.getInt(4);
-                v.addElement(new ShoesDB(i, itemName, price, stock));
+                v.addElement(new PantsDB(i, itemName, price, stock));
             }
         } catch (SQLException ex) {
         }
         return v;
     }
 }
-
-
-
-
-

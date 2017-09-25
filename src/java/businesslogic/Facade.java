@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  * @author fauzianordlund
  */
 public class Facade {
+    private static User user;
+    
     public static String example(){
        return "this will connect to a database";
     }
@@ -45,16 +47,35 @@ public class Facade {
         return table;
     }
     
-        public static Hashtable getShirt(String group, Connection con) {
-        LookShirt look = new LookShirt();
+    public static Hashtable getShirts(String group, Connection con) {
+        LookShirts look = new LookShirts();
         Hashtable table = look.getShirtWithGroup(group, con);
         System.out.println("table: " + table.toString());
         return table;
     }
+        
+    public static Hashtable getGloves(String group, Connection con) {
+        LookGloves look = new LookGloves();
+        Hashtable table = look.getGlovesWithGroup(group, con);
+        System.out.println("table: " + table.toString());
+        return table;
+    }
+        
+    public static Hashtable getPants(String group, Connection con) {
+        LookPants look = new LookPants();
+        Hashtable table = look.getPantsWithGroup(group, con);
+        System.out.println("table: " + table.toString());
+        return table;
+    }
     
-    public static User getUserCredentials(String username,String password){
+    public static void getUserCredentials(String username,String password){
         User u = null;
         u = ValidateUser.validateClient(username, password);
-        return u;
+        user = u;
+        //return u;
+    }
+    
+    public static User getUser() {
+        return user;
     }
 }
