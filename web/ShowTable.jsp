@@ -39,6 +39,7 @@
             Facade facade = (Facade)session.getAttribute("Facade");
             User u = facade.getUser();
             Hashtable table = new Hashtable();
+            String hej = "hej";
             for (int k = 0; k < 4; k++) {
                 table = null;
                 if (request.getParameter("Shoes") != null && k == 0) { 
