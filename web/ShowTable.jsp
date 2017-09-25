@@ -39,6 +39,7 @@
             //String username = (String)session.getAttribute("Name");
             //String password = (String)session.getAttribute("Password");
             //Facade facade = (Facade)session.getAttribute("Facade");
+            
             Facade facade = new Facade();
             facade.getUserCredentials("u1", "u1");
             User u = facade.getUser();
@@ -47,7 +48,7 @@
             ShoppingCart sc = facade.getCart();
             for (int k = 0; k < 4; k++) {
                 table = null;
-                if (request.getParameter("Shoes") != null && k == 0) { 
+                if (session.getAttribute("searchShoes") != null && k == 0) { 
                     table = facade.getShoes("hej", u.getCon());%>
                     <h2>Shoes</h2>
                     <table>
@@ -83,7 +84,7 @@
 
                     </table>
                 <%}
-                if (request.getParameter("Shirts") != null && k == 1) { 
+                if (session.getAttribute("searchShirts") != null && k == 1) { 
                     table = facade.getShirts("hej", u.getCon()); %>
                     <h2>Shirts</h2>
                                        <table>
@@ -122,7 +123,7 @@
                 }
 
 
-                if (request.getParameter("Gloves") != null && k == 2) { 
+                if (session.getAttribute("searchGloves") != null && k == 2) { 
                     table = facade.getGloves("hej", u.getCon()); %>
                     <h2>Gloves</h2>
                                        <table>
@@ -158,7 +159,7 @@
 
                     </table>
                 <%}
-                if (request.getParameter("Pants") != null && k == 3) { 
+                if (session.getAttribute("searchPants") != null && k == 3) { 
                     table = facade.getPants("hej", u.getCon()); %>
                     <h2>Pants</h2>
                                        <table>
