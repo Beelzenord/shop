@@ -17,8 +17,13 @@
             int amount = Integer.parseInt(request.getParameter("Amount"));
             out.println(s + " ");
             out.println(amount);
-            //int number = (int)request.getAttribute("Pants1");
-            //out.println(number);
-        %>
+            String site = new String("ShowTable.jsp");
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", site); 
+            request.getParameter("Shoes");
+            request.getParameter("Gloves");
+            request.getParameter("Pants");
+            request.getParameter("Shirts");
+       %>
     </body>
 </html>

@@ -17,18 +17,16 @@
         <h1>Hello World!</h1>
         
         <%  
-           out.println("TOGGAF");
             RequestDispatcher ds = request.getRequestDispatcher("mainservices.jsp"); 
-          String username = request.getParameter("username");
-          String password = request.getParameter("password");
-          Facade facade = new Facade();
-          facade.getUserCredentials(username, password);
-          User u = facade.getUser();
-          session.setAttribute("Facade", facade);
-          out.println(u.toString());
-          if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            Facade facade = new Facade(); // new shopping cart
+            facade.getUserCredentials(username, password);  
+            User u = facade.getUser();
+            session.setAttribute("Facade", facade); // store facade in sessions
+            if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
               ds.forward(request, response);
-          }    
+            }    
         %>
     </body>
 </html>
