@@ -13,7 +13,7 @@
     </head>
     <body>
         <% 
-            String s = (String)request.getParameter("Pants");
+            String s = (String)request.getParameter("Item");
             int amount = Integer.parseInt(request.getParameter("Amount"));
             out.println(s + " ");
             out.println(amount);

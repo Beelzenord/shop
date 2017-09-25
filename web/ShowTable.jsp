@@ -64,10 +64,20 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
-                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
-                                String s = "Shoes"+z;
-                                    %> <option value = s> <%= z %>  </option> <%
-                            } %> </select></td>   
+                            <%String item = "Shoes"+i;%>
+                            <td> 
+                                <form method="get" action="shoppingcart.jsp">
+                                <select name = "Amount"> 
+                                    <% for(int z = 1;z <= (int)tmp.get("stock");z++){ %> 
+                                        <option value = <%=z%>> <%= z %> </option>
+                                    <% } %> 
+                                </select>
+                            </td> 
+                                <input type="hidden" name="Item" value=<%=item%>>
+                            <td> 
+                                 <input type="submit" value="Add to Cart">
+                                </form> 
+                            </td>   
                         </tr>
                         <% } %>
 
@@ -90,10 +100,20 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
-                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
-                                String s = "Shirts"+z;
-                                    %> <option value = s> <%= z %>  </option> <%
-                            } %> </select></td>   
+                            <%String item = "Shirt"+i;%>
+                            <td> 
+                                <form method="get" action="shoppingcart.jsp">
+                                <select name = "Amount"> 
+                                    <% for(int z = 1;z <= (int)tmp.get("stock");z++){ %> 
+                                        <option value = <%=z%>> <%= z %> </option>
+                                    <% } %> 
+                                </select>
+                            </td> 
+                                <input type="hidden" name="Item" value=<%=item%>>
+                            <td> 
+                                 <input type="submit" value="Add to Cart">
+                                </form> 
+                            </td>   
                         </tr>
                         <% } %>
 
@@ -119,10 +139,20 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
-                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
-                                String s = "Gloves"+z;
-                                    %> <option value = s> <%= z %>  </option> <%
-                            } %> </select></td>   
+                            <%String item = "Gloves"+i;%>
+                            <td> 
+                                <form method="get" action="shoppingcart.jsp">
+                                <select name = "Amount"> 
+                                    <% for(int z = 1;z <= (int)tmp.get("stock");z++){ %> 
+                                        <option value = <%=z%>> <%= z %> </option>
+                                    <% } %> 
+                                </select>
+                            </td> 
+                                <input type="hidden" name="Item" value=<%=item%>>
+                            <td> 
+                                 <input type="submit" value="Add to Cart">
+                                </form> 
+                            </td>  
                         </tr>
                         <% } %>
 
@@ -145,20 +175,20 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
-                            <%String brand = "Pants"+i;%>
-                            <td> <form method="get" action="shoppingcart.jsp">
-                                <select name = "Amount"> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
-                                
-                                
-                                    %> <option value = <%=z%>> <%= z %> </option>
-                                    
-                                    
-                            <% } %> </select></td> 
-                            <input type="hidden" name="Pants" value=<%=brand%>>
-                                
+                            <%String item = "Pants"+i;%>
+                            <td> 
+                                <form method="get" action="shoppingcart.jsp">
+                                <select name = "Amount"> 
+                                    <% for(int z = 1;z <= (int)tmp.get("stock");z++){ %> 
+                                        <option value = <%=z%>> <%= z %> </option>
+                                    <% } %> 
+                                </select>
+                            </td> 
+                                <input type="hidden" name="Item" value=<%=item%>>
                             <td> 
                                  <input type="submit" value="Add to Cart">
-                                </form> </td>
+                                </form> 
+                            </td>
                         </tr>
                         <% } %>
 
