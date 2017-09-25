@@ -4,6 +4,7 @@
     Author     : Niklas
 --%>
 
+<%@page import="businesslogic.ShoppingCart"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="businesslogic.User"%>
 <%@page import="businesslogic.Facade"%>
@@ -35,12 +36,15 @@
     <body>
         <h1>Items for sale</h1>
         <%
-            String username = (String)session.getAttribute("Name");
-            String password = (String)session.getAttribute("Password");
-            Facade facade = (Facade)session.getAttribute("Facade");
+            //String username = (String)session.getAttribute("Name");
+            //String password = (String)session.getAttribute("Password");
+            //Facade facade = (Facade)session.getAttribute("Facade");
+            Facade facade = new Facade();
+            facade.getUserCredentials("u1", "u1");
             User u = facade.getUser();
             Hashtable table = new Hashtable();
             String hej = "hej";
+            ShoppingCart sc = facade.getCart();
             for (int k = 0; k < 4; k++) {
                 table = null;
                 if (request.getParameter("Shoes") != null && k == 0) { 
@@ -141,11 +145,20 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
-                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
-                                String s = "Pants"+z;
-                                    %> <option value = s> <%= z %>  </option> <%
-                            } %> </select></td>
-                            <td> <button onclick= "confirm.jsp" > Add to Cart </button> </td>
+                            <%String brand = "Pants"+i;%>
+                            <td> <form method="get" action="shoppingcart.jsp">
+                                <select name = "Amount"> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
+                                
+                                
+                                    %> <option value = <%=z%>> <%= z %> </option>
+                                    
+                                    
+                            <% } %> </select></td> 
+                            <input type="hidden" name="Pants" value=<%=brand%>>
+                                
+                            <td> 
+                                 <input type="submit" value="Add to Cart">
+                                </form> </td>
                         </tr>
                         <% } %>
 

@@ -22,6 +22,16 @@ import java.util.logging.Logger;
  */
 public class Facade {
     private static User user;
+    private ShoppingCart cart;
+    private Hashtable shoes;
+    private Hashtable pants;
+    private Hashtable shirts;
+    private Hashtable gloves;
+
+    public Facade() {
+        this.cart = new ShoppingCart();
+    }
+    
     
     public static String example(){
        return "this will connect to a database";
@@ -32,6 +42,16 @@ public class Facade {
         return con;
        
     }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
+    
+    
     
     public static Hashtable getItems(String group, Connection con) {
         LookItems look = new LookItems();

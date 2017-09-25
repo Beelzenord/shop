@@ -31,7 +31,7 @@ public class LookGloves {
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
             items.put("stock", anewitem.getStock());
-            t.put("Item"+i, items);
+            t.put("Gloves"+i, items);
         }
         return t;
     }
