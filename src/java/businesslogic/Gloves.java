@@ -19,7 +19,7 @@ public class Gloves extends Item {
         return GlovesDB.searchItems(group, con);
     }
         
-    public Gloves(int id, String name, int price, int stock) {
+    public Gloves(int id, String name, double price, int stock) {
         super(id, name, price, stock);
     }
     

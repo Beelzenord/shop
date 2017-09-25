@@ -17,13 +17,13 @@ import java.util.Vector;
 public class Item {
     private int id;
     private String name;
-    private int price;
+    private double price;
     private int stock;
     /*static public Collection searchItems(String group, Connection con) {
         return ItemDB.searchItems(group, con);
     }*/
 
-    public Item(int id, String name, int price, int stock) {
+    public Item(int id, String name, double price, int stock) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -38,7 +38,7 @@ public class Item {
         return name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

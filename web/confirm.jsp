@@ -21,10 +21,6 @@
             RequestDispatcher ds = request.getRequestDispatcher("mainservices.jsp"); 
           String username = request.getParameter("username");
           String password = request.getParameter("password");
-          session.setAttribute("Name", username);
-          session.setAttribute("Password", password);
-          out.println(username);
-          out.println(password);
           Facade facade = new Facade();
           facade.getUserCredentials(username, password);
           User u = facade.getUser();
