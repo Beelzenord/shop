@@ -7,6 +7,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="businesslogic.User"%>
 <%@page import="businesslogic.Facade"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,21 +44,8 @@
             for (int k = 0; k < 4; k++) {
                 table = null;
                 if (request.getParameter("Shoes") != null && k == 0) { 
-                    table = facade.getShoes("hej", u.getCon()); %>
+                    table = facade.getShoes("hej", u.getCon());%>
                     <h2>Shoes</h2>
-                <%}
-                if (request.getParameter("Shirts") != null && k == 1) { 
-                    table = facade.getShirts("hej", u.getCon()); %>
-                    <h2>Shirts</h2>
-                <%}
-                if (request.getParameter("Gloves") != null && k == 2) { 
-                    table = facade.getGloves("hej", u.getCon()); %>
-                    <h2>Gloves</h2>
-                <%}
-                if (request.getParameter("Pants") != null && k == 3) { 
-                    table = facade.getPants("hej", u.getCon()); %>
-                    <h2>Pants</h2>
-                <% } if (table != null) { %>
                     <table>
                         <tr>
                             <th> Name </th>
@@ -66,17 +54,102 @@
                         </tr>
                         <%
                             for (int i = 0; i < (int)table.get("size"); i++) {
-                                Hashtable tmp = (Hashtable)table.get("Item"+i);
+                                Hashtable tmp = (Hashtable)table.get("Shoes"+i);
                         %>
                         <tr>
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("stock")%></td> 
+                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
+                                String s = "Shoes"+z;
+                                    %> <option value = s> <%= z %>  </option> <%
+                            } %> </select></td>   
                         </tr>
                         <% } %>
 
                     </table>
-                <% } %>
-            <% } %>
+                <%}
+                if (request.getParameter("Shirts") != null && k == 1) { 
+                    table = facade.getShirts("hej", u.getCon()); %>
+                    <h2>Shirts</h2>
+                                       <table>
+                        <tr>
+                            <th> Name </th>
+                            <th> Price </th>
+                            <th> Stock </th>
+                        </tr>
+                        <%
+                            for (int i = 0; i < (int)table.get("size"); i++) {
+                                Hashtable tmp = (Hashtable)table.get("Shirt"+i);
+                        %>
+                        <tr>
+                            <td> <%= tmp.get("name")%></td> 
+                            <td> <%= tmp.get("price")%></td> 
+                            <td> <%= tmp.get("stock")%></td> 
+                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
+                                String s = "Shirts"+z;
+                                    %> <option value = s> <%= z %>  </option> <%
+                            } %> </select></td>   
+                        </tr>
+                        <% } %>
+
+                    </table>
+                <%
+                }
+
+
+                if (request.getParameter("Gloves") != null && k == 2) { 
+                    table = facade.getGloves("hej", u.getCon()); %>
+                    <h2>Gloves</h2>
+                                       <table>
+                        <tr>
+                            <th> Name </th>
+                            <th> Price </th>
+                            <th> Stock </th>
+                        </tr>
+                        <%
+                            for (int i = 0; i < (int)table.get("size"); i++) {
+                                Hashtable tmp = (Hashtable)table.get("Gloves"+i);
+                        %>
+                        <tr>
+                            <td> <%= tmp.get("name")%></td> 
+                            <td> <%= tmp.get("price")%></td> 
+                            <td> <%= tmp.get("stock")%></td> 
+                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
+                                String s = "Gloves"+z;
+                                    %> <option value = s> <%= z %>  </option> <%
+                            } %> </select></td>   
+                        </tr>
+                        <% } %>
+
+                    </table>
+                <%}
+                if (request.getParameter("Pants") != null && k == 3) { 
+                    table = facade.getPants("hej", u.getCon()); %>
+                    <h2>Pants</h2>
+                                       <table>
+                        <tr>
+                            <th> Name </th>
+                            <th> Price </th>
+                            <th> Stock </th>
+                        </tr>
+                        <%
+                            for (int i = 0; i < (int)table.get("size"); i++) {
+                                Hashtable tmp = (Hashtable)table.get("Pants"+i);
+                        %>
+                        <tr>
+                            <td> <%= tmp.get("name")%></td> 
+                            <td> <%= tmp.get("price")%></td> 
+                            <td> <%= tmp.get("stock")%></td> 
+                            <td> <select> <% for(int z = 1;z <= (int)tmp.get("stock");z++){
+                                String s = "Pants"+z;
+                                    %> <option value = s> <%= z %>  </option> <%
+                            } %> </select></td>
+                            <td> <button onclick= "confirm.jsp" > Add to Cart </button> </td>
+                        </tr>
+                        <% } %>
+
+                    </table>
+                <% }} %>
     </body>
 </html>
