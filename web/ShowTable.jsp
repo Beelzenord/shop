@@ -34,8 +34,8 @@
         </style>
     </head>
     <body>
-        <a href= "ShowShoppingcart.jsp"> See Shopping Cart</a><br>
-        <a href= "getitems.jsp"> See inventory</a><br>
+        <a href= "showshoppingcart.jsp"> See Shopping Cart</a><br>
+        <a href= "getitems.jsp"> Search for Items</a><br>
         <h1>Items for sale</h1>
         <%
             String username = (String)session.getAttribute("Name");

@@ -26,6 +26,10 @@ public class ShoppingCart {
         cart.put(type, tmp);
     }
 
+    public void removeElement(String target) {
+        cart.remove(target);
+    }
+    
     public Hashtable getCart() {
         return cart;
     }

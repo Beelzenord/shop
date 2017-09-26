@@ -15,7 +15,7 @@
     <body>
         <h1>Welcome to Å och N</h1>
     
-    <a href= "getitems.jsp"> See inventory</a> 
+    <a href= "getitems.jsp"> Search for Items</a> 
     <br/>
     <% //RequestDispatcher ds = request.getRequestDispatcher("index.html"); 
     //ds.forward(request, response);

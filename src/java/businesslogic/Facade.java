@@ -51,14 +51,16 @@ public class Facade {
         }
     }
     
+    public void removeFromShoppingCart(String target) {
+        cart.removeElement(target);
+    }
+    
     public static String example(){
        return "this will connect to a database";
     }
     public static Connection isValid(Connection con){
-        
         //con = null;
         return con;
-       
     }
 
     public Hashtable getCart() {
