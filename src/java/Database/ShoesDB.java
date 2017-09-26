@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 public class ShoesDB extends Shoes {
     
-    private ShoesDB(int id, String name, double price, int stock) {
+    private ShoesDB(int id, String name, float price, int stock) {
         super(id, name, price, stock);
     }
     
@@ -49,7 +49,7 @@ public class ShoesDB extends Shoes {
             while (rs.next()) {
                 int i = rs.getInt(1);
                 String itemName = rs.getString(2);
-                double price = rs.getFloat(3);
+                float price = rs.getFloat(3);
                 int stock = rs.getInt(4);
                 v.addElement(new ShoesDB(i, itemName, price, stock));
             }

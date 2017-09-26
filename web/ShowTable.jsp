@@ -34,18 +34,19 @@
         </style>
     </head>
     <body>
+        <a href= "ShowShoppingcart.jsp"> See Shopping Cart</a><br>
+        <a href= "getitems.jsp"> See inventory</a><br>
         <h1>Items for sale</h1>
         <%
-            //String username = (String)session.getAttribute("Name");
-            //String password = (String)session.getAttribute("Password");
-            //Facade facade = (Facade)session.getAttribute("Facade");
+            String username = (String)session.getAttribute("Name");
+            String password = (String)session.getAttribute("Password");
+            Facade facade = (Facade)session.getAttribute("Facade");
             
-            Facade facade = new Facade();
-            facade.getUserCredentials("u1", "u1");
+            //Facade facade = new Facade();
+            //session.setAttribute("Facade", facade);
+            //facade.getUserCredentials("u1", "u1");
             User u = facade.getUser();
             Hashtable table = new Hashtable();
-            String hej = "hej";
-            ShoppingCart sc = facade.getCart();
             for (int k = 0; k < 4; k++) {
                 table = null;
                 if (session.getAttribute("searchShoes") != null && k == 0) { 

@@ -4,6 +4,7 @@
     Author     : fauzianordlund
 --%>
 
+<%@page import="businesslogic.Facade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,9 +14,11 @@
     </head>
     <body>
         <% 
-            String s = (String)request.getParameter("Item");
+            String target = (String)request.getParameter("Item");
             int amount = Integer.parseInt(request.getParameter("Amount"));
-            out.println(s + " ");
+            Facade facade = (Facade)session.getAttribute("Facade");
+            facade.updateShoppingCart(target, amount);
+            out.println(target + " ");
             out.println(amount);
             String site = new String("ShowTable.jsp");
             response.setStatus(response.SC_MOVED_TEMPORARILY);

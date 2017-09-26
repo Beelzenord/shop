@@ -25,5 +25,9 @@ public class ShoppingCart {
         tmp.put("amount", amount);
         cart.put(type, tmp);
     }
+
+    public Hashtable getCart() {
+        return cart;
+    }
     
 }

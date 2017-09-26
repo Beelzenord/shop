@@ -19,7 +19,7 @@ import java.util.Vector;
  */
 public class PantsDB extends Pants {
     
-    private PantsDB(int id, String name,  double price,  int stock) {
+    private PantsDB(int id, String name,  float price,  int stock) {
         super(id, name, price, stock);
     }
     
@@ -44,7 +44,7 @@ public class PantsDB extends Pants {
             while (rs.next()) {
                 int i = rs.getInt(1);
                 String itemName = rs.getString(2);
-                double price = rs.getFloat(3);
+                float price = rs.getFloat(3);
                 int stock = rs.getInt(4);
                 v.addElement(new PantsDB(i, itemName, price, stock));
             }

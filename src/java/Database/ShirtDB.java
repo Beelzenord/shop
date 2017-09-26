@@ -22,7 +22,7 @@ import java.util.Vector;
 
 public class ShirtDB extends Shirt {
     
-    private ShirtDB(int id, String name,  double price,  int stock) {
+    private ShirtDB(int id, String name,  float price,  int stock) {
         super(id, name, price, stock);
     }
     
@@ -47,7 +47,7 @@ public class ShirtDB extends Shirt {
             while (rs.next()) {
                 int i = rs.getInt(1);
                 String itemName = rs.getString(2);
-                double price = rs.getFloat(3);
+                float price = rs.getFloat(3);
                 int stock = rs.getInt(4);
                 v.addElement(new ShirtDB(i, itemName, price, stock));
             }

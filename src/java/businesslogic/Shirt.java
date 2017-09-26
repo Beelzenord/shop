@@ -20,7 +20,7 @@ public class Shirt extends Item{
         return ShirtDB.searchItems(group, con);
     }
     
-    public Shirt(int id, String name, double price, int stock) {
+    public Shirt(int id, String name, float price, int stock) {
         super(id, name, price, stock);
     }
 }

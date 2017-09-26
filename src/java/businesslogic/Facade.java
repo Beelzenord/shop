@@ -32,6 +32,24 @@ public class Facade {
         this.cart = new ShoppingCart();
     }
     
+    public void updateShoppingCart(String target, int amount) {
+        if (target.contains("Shoes")) {
+            Hashtable tmp = (Hashtable)shoes.get(target);
+            cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
+        }
+        else if (target.contains("Shirt")) {
+            Hashtable tmp = (Hashtable)shirts.get(target);
+            cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
+        }
+        else if (target.contains("Gloves")) {
+            Hashtable tmp = (Hashtable)gloves.get(target);
+            cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
+        }
+        else if (target.contains("Pants")) {
+            Hashtable tmp = (Hashtable)pants.get(target);
+            cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
+        }
+    }
     
     public static String example(){
        return "this will connect to a database";
@@ -43,15 +61,13 @@ public class Facade {
        
     }
 
-    public ShoppingCart getCart() {
-        return cart;
+    public Hashtable getCart() {
+        return cart.getCart();
     }
 
     public void setCart(ShoppingCart cart) {
         this.cart = cart;
     }
-    
-    
     
     public static Hashtable getItems(String group, Connection con) {
         LookItems look = new LookItems();
@@ -60,31 +76,31 @@ public class Facade {
         return table;
     }
     
-    public static Hashtable getShoes(String group, Connection con) {
+    public Hashtable getShoes(String group, Connection con) {
         LookShoes look = new LookShoes();
         Hashtable table = look.getShoesWithGroup(group, con);
-        System.out.println("table: " + table.toString());
+        this.shoes = table;
         return table;
     }
     
-    public static Hashtable getShirts(String group, Connection con) {
+    public Hashtable getShirts(String group, Connection con) {
         LookShirts look = new LookShirts();
         Hashtable table = look.getShirtWithGroup(group, con);
-        System.out.println("table: " + table.toString());
+        this.shirts = table;
         return table;
     }
         
-    public static Hashtable getGloves(String group, Connection con) {
+    public Hashtable getGloves(String group, Connection con) {
         LookGloves look = new LookGloves();
         Hashtable table = look.getGlovesWithGroup(group, con);
-        System.out.println("table: " + table.toString());
+        this.gloves = table;
         return table;
     }
         
-    public static Hashtable getPants(String group, Connection con) {
+    public Hashtable getPants(String group, Connection con) {
         LookPants look = new LookPants();
         Hashtable table = look.getPantsWithGroup(group, con);
-        System.out.println("table: " + table.toString());
+        this.pants = table;
         return table;
     }
     

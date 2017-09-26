@@ -19,7 +19,7 @@ public class Pants extends Item{
         return PantsDB.searchItems(group, con);
     }
         
-    public Pants(int id, String name, double price, int stock) {
+    public Pants(int id, String name, float price, int stock) {
         super(id, name, price, stock);
     }
     

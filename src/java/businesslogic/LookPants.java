@@ -28,6 +28,7 @@ public class LookPants {
         for (int i = 0; it.hasNext(); i++) {
             Hashtable items = new Hashtable();
             Pants anewitem = (Pants)it.next();
+            items.put("id", anewitem.getId());
             items.put("name", anewitem.getName());
             items.put("price", anewitem.getPrice());
             items.put("stock", anewitem.getStock());
