@@ -1,15 +1,23 @@
 CREATE DATABASE `shop` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
+CREATE TABLE orders (
+	id int(11) NOT NULL, 
+    tableName varchar(45) NOT NULL, 
+    amount int(11), 
+    username varchar(45), 
+    PRIMARY KEY(id, tableName)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `glovesClass` (
-  `glovesID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `price` float NOT NULL,
-  `stock` int(11) NOT NULL,
+  `stock` int(11) NOT NULL CHECK (test_column > -1),
   PRIMARY KEY (`glovesID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `shoeClass` (
-  `shoeID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `price` float NOT NULL,
   `stock` varchar(45) NOT NULL,
@@ -18,24 +26,15 @@ CREATE TABLE `shoeClass` (
 
 
 CREATE TABLE `pantsClass` (
-  `pantsID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `price` float NOT NULL,
   `stock` int(11) NOT NULL,
   PRIMARY KEY (`pantsID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `t_shirtClass` (
-  `t_shirtID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `price` float NOT NULL,
-  `stock` int(11) NOT NULL,
-  PRIMARY KEY (`t_shirtID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 CREATE TABLE `shirtClass` (
-  `shirtID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `price` float NOT NULL,
   `stock` varchar(45) NOT NULL,
