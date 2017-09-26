@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package businesslogic;
+import Database.CreateOrderDB;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
 import java.sql.Connection;
@@ -104,6 +105,12 @@ public class Facade {
         Hashtable table = look.getPantsWithGroup(group, con);
         this.pants = table;
         return table;
+    }
+    
+    public void createOrder() {
+        CreateOrderDB.createOrder(user.getCon(), cart.getCart(), user.getUsername());
+        // uppdate shoppingcart if successful
+        cart = new ShoppingCart();
     }
     
     public static void getUserCredentials(String username,String password){

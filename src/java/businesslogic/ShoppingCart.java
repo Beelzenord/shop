@@ -16,14 +16,14 @@ public class ShoppingCart {
     public ShoppingCart() {
         cart = new Hashtable();
     }
-    // id, name, price, amount
-    public void addNewElement(String type, int id, String name, float price, int amount) {
+    // id, name, price, amount  // tablename
+    public void addNewElement(String tablename, int id, String name, float price, int amount) {
         Hashtable tmp = new Hashtable();
         tmp.put("id", id);
         tmp.put("name", name);
         tmp.put("price", price);
         tmp.put("amount", amount);
-        cart.put(type, tmp);
+        cart.put(tablename, tmp);
     }
 
     public void removeElement(String target) {

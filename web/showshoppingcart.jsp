@@ -64,15 +64,20 @@
                                 <input type="hidden" name="Removed" value=<%=item%>>
                             <td> 
                                  <input type="submit" value="Remove">
-                                </form> 
+                            </form> 
                         </tr>
                          <%  total += ((float)tmp.get("price") * (int)tmp.get("amount"));
                          } %>
 
                     </table>
                     <h3> 
-                         <td> Total sum: </td> 
-                         <td> <%= total%> </td>
-                     </h3>
+                        <td> Total sum: </td> 
+                        <td> <%= total%> </td>
+                        <form method="get" action="CreateOrder.jsp">
+                            <td> 
+                                 <input type="submit" value="Create Order">
+                            </td> 
+                        </form> 
+                    </h3>
     </body>
 </html>
