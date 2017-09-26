@@ -2,6 +2,7 @@
     Document   : LoginPage
     Created on : Sep 22, 2017, 11:05:05 AM
     Author     : fauzianordlund
+    <a href = "loginadmin.jsp">Login as staff</a>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,6 +18,8 @@
             Enter the word: <input type="text" name="username" required><br/>
             Enter the password: <input type = "password" name="password" required><br/>
             <input type="submit" value = "OK">
+          </form>
+        <a href = "loginadmin.jsp">Login as staff</a>
     </body>
    
 </html>
