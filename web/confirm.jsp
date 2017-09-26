@@ -7,6 +7,7 @@
 <%@page import="businesslogic.User"%>
 <%@page import="businesslogic.Facade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +16,12 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <c:choose >
+            <c:when test="${param.admin} eq 'yes">
+                <p> stuff</p>
+            </c:when>
         
+            <c:otherwise>
         <%  
             RequestDispatcher ds = request.getRequestDispatcher("mainservices.jsp"); 
             String username = request.getParameter("username");
@@ -28,5 +34,7 @@
               ds.forward(request, response);
             }    
         %>
+        </c:otherwise>
+       </c:choose>
     </body>
 </html>
