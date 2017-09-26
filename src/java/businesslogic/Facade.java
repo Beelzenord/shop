@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class Facade {
     private static User user;
+    private static Admin admin;
     private ShoppingCart cart;
     private Hashtable shoes;
     private Hashtable pants;
@@ -118,6 +119,14 @@ public class Facade {
         u = ValidateUser.validateClient(username, password);
         user = u;
         //return u;
+    }
+    public static void getAdminCredentials(String username,String password){
+        Admin a = null;
+        a = ValidateUser.validateAdmin(username, password);
+        admin = a;
+    }
+    public static Admin getAdmin(){
+        return admin;
     }
     
     public static User getUser() {

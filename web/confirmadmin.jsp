@@ -1,13 +1,12 @@
 <%-- 
-    Document   : confirm
-    Created on : Sep 24, 2017, 2:54:57 AM
+    Document   : confirmadmin
+    Created on : Sep 26, 2017, 10:44:48 PM
     Author     : fauzianordlund
 --%>
 
-<%@page import="businesslogic.User"%>
+<%@page import="businesslogic.Admin"%>
 <%@page import="businesslogic.Facade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,18 +15,17 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-     <%
-            RequestDispatcher ds = request.getRequestDispatcher("mainservices.jsp"); 
+            <%
+            RequestDispatcher ds = request.getRequestDispatcher("adminservices.jsp"); 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             Facade facade = new Facade(); // new shopping cart
-            facade.getUserCredentials(username, password);  
-            User u = facade.getUser();
+            facade.getAdminCredentials(username, password);  
+            Admin a = facade.getAdmin();
             session.setAttribute("Facade", facade); // store facade in sessions
-            if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
+            if(username.equals(a.getUsername())&&password.equals(a.getPassword())){
               ds.forward(request, response);
             }    
         %>
-       
     </body>
 </html>

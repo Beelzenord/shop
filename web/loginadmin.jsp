@@ -4,6 +4,8 @@
     Author     : fauzianordlund
 --%>
 
+<%@page import="businesslogic.Admin"%>
+<%@page import="businesslogic.Facade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,11 +15,12 @@
     </head>
     <body>
         <h1>Login as admin</h1>
-        <form name ="confirm.jsp" method = "get" scope = "session">
+        <form action ="confirmadmin.jsp" method = "get" scope = "session">
             <input type = "text" name ="username" require><br/>
             <input type = "password" name ="password" required><br/>
             <input type = "hidden" name ="admin" value="yes">
             <input type = "submit" value ="Submit">
         </form>
+      
     </body>
 </html>
