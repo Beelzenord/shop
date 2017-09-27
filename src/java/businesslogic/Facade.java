@@ -5,6 +5,7 @@
  */
 package businesslogic;
 import Database.CreateOrderDB;
+import Database.PresentListDB;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +31,7 @@ public class Facade {
     private Hashtable pants;
     private Hashtable shirts;
     private Hashtable gloves;
-    private Hashtable users;
+    private Vector users;
 
     public Facade() {
         this.cart = new ShoppingCart();
@@ -53,7 +55,11 @@ public class Facade {
             cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
         }
     }
-    
+    public Vector getUsers(Connection con){
+      
+       users = PresentListDB.createOrder(con);
+       return users;
+    } 
     public void removeFromShoppingCart(String target) {
         cart.removeElement(target);
     }
@@ -133,4 +139,5 @@ public class Facade {
     public static User getUser() {
         return user;
     }
+   
 }
