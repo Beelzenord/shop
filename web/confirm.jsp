@@ -27,6 +27,10 @@
             if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
               ds.forward(request, response);
             }    
+            else{
+                out.println("invalid");
+            }
+            
         %>
        
     </body>

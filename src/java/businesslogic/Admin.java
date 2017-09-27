@@ -84,5 +84,10 @@ public class Admin {
     public void setCon(Connection con) {
         this.con = con;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", con=" + con + '}';
+    }
     
 }

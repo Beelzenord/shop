@@ -29,6 +29,7 @@ public class Facade {
     private Hashtable pants;
     private Hashtable shirts;
     private Hashtable gloves;
+    private Hashtable users;
 
     public Facade() {
         this.cart = new ShoppingCart();

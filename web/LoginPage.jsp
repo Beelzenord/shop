@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Welcome to the E-Shop</h1>
-          <form  method ="get" action="confirm.jsp">
+          <form  method ="get" action="confirm.jsp" scope ="session">
             Enter the word: <input type="text" name="username" required><br/>
             Enter the password: <input type = "password" name="password" required><br/>
             <input type="submit" value = "OK">
