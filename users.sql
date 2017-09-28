@@ -24,5 +24,14 @@ GRANT SELECT, INSERT, UPDATE ON shirtClass TO 'u1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON glovesClass TO 'u1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON pantsClass TO 'u1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON user TO 'u1'@'localhost';
-GRANT SELECT, INSERT, UPDATE ON orders TO 'u1'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON orders TO 'u1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON orderDetails TO 'u1'@'localhost';
+
+CREATE USER IF NOT EXISTS 'l1'@'localhost' identified BY 'l1';
+GRANT SELECT, INSERT, UPDATE ON shoeClass TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON shirtClass TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON glovesClass TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON pantsClass TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON user TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON orders TO 'l1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON orderDetails TO 'l1'@'localhost';

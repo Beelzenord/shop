@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : ShowOrders
     Created on : Sep 27, 2017, 4:26:10 PM
     Author     : Niklas
@@ -75,7 +75,7 @@
                     <h3> 
                         OrderID: <%=orderID%>      Username: <%=username%> 
                         <form method="get" action="ExecuteOrder.jsp">
-                                <input type="hidden" name="Ececute" value=<%=orderID%>>
+                                <input type="hidden" name="Execute" value=<%=orderID%>>
                                 <input type="submit" value="Create Order">
 
                         </form> 

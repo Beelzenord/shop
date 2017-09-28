@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package businesslogic;
-import Database.CreateOrderDB;
+import Database.HandleOrdersDB;
 import Database.PresentListDB;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
@@ -125,14 +125,13 @@ public class Facade {
     }
     
     public void createOrder() {
-        CreateOrderDB.createOrder(user.getCon(), cart.getCart(), user.getUsername());
-        // uppdate shoppingcart if successful
-        cart = new ShoppingCart();
+        if (HandleOrdersDB.createOrder(user.getCon(), cart.getCart(), user.getUsername()))
+            cart = new ShoppingCart();
     }
     
     public void executeOrder(int orderID) {
         Hashtable tmp = (Hashtable)orders.get(orderID);
-        
+        HandleOrdersDB.executeOrder(user.getCon(), tmp, orderID);
     }
     
     public static void getUserCredentials(String username,String password){

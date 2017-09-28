@@ -14,7 +14,7 @@
     </head>
     <body>
         <%
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            int orderID = Integer.parseInt(request.getParameter("Execute"));
             Facade facade = (Facade)session.getAttribute("Facade");
             facade.executeOrder(orderID);
             String site = new String("ShowOrders.jsp");
