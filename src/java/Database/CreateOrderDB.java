@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,44 +22,66 @@ import java.util.logging.Logger;
  */
 public class CreateOrderDB {
     
-    public static void createOrder(Connection con, Hashtable table, String username) {
-        ;
+    public static boolean createOrder(Connection con, Hashtable table, String username) {
         PreparedStatement pst = null;
-        try {
-             pst = con.prepareStatement(createPrepStatement());
-        } catch (SQLException ex) {
-        }
+        PreparedStatement orderIdPrep = null;
+        ResultSet rs = null;
         Enumeration e = table.keys();
-        while (e.hasMoreElements()) {
-            String s = (String)e.nextElement();
-            Hashtable tmp = (Hashtable)table.get(s);
-            String tableName = null;
-            if (s.contains("Shoes"))
-                tableName = "shoeClass";
-            else if (s.contains("Shirt"))
-                tableName = "shirtClass";
-            else if (s.contains("Gloves"))
-                tableName = "glovesClass";
-            else if (s.contains("Pants"))
-                tableName = "pantsClass";
-            try {
-                pst.setInt(1, (int)tmp.get("id"));
-                pst.setString(2, tableName);
-                pst.setInt(3, (int)tmp.get("amount"));
-                pst.setString(4, username);
-                pst.addBatch();
-            } catch (SQLException ex) {
-                Logger.getLogger(CreateOrderDB.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        
         try {
-            pst.executeBatch();
+            pst = con.prepareStatement(createOrderPrepStatement());
+            orderIdPrep = con.prepareStatement(createOrderDetailsPrepStatement(), PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            con.setAutoCommit(false);
+            orderIdPrep.executeUpdate();
+            rs = orderIdPrep.getGeneratedKeys();
+            int orderID = 0;
+            if (rs.next())
+                orderID = rs.getInt(1);
+            
+            while (e.hasMoreElements()) {
+                String s = (String)e.nextElement();
+                Hashtable tmp = (Hashtable)table.get(s);
+                String tableName = null;
+                if (s.contains("Shoes"))
+                    tableName = "shoeClass";
+                else if (s.contains("Shirt"))
+                    tableName = "shirtClass";
+                else if (s.contains("Gloves"))
+                    tableName = "glovesClass";
+                else if (s.contains("Pants"))
+                    tableName = "pantsClass";
+                pst.setInt(1, orderID);
+                pst.setInt(2, (int)tmp.get("id"));
+                pst.setString(3, tableName);
+                pst.setInt(4, (int)tmp.get("amount"));
+                pst.setString(5, username);
+                pst.executeUpdate();
+            }
+            con.commit();
+            con.setAutoCommit(true);
+            rs.close();
+            pst.close();
+            orderIdPrep.close();
         } catch (SQLException ex) {
+            System.out.println("DID NOT COMMIT");
+            try {
+                con.rollback();
+                return false;
+            } catch (SQLException ex1) {
+            }
+            return false;
         }
+        System.out.println("WORKING");
+        return true;
     }
     
-    private static String createPrepStatement() {
-        return "INSERT INTO orders (id, tableName, amount, username) "
-                + "VALUES(?, ?, ?, ?)";
+    private static String createOrderDetailsPrepStatement() {
+        return "INSERT INTO orders (orderID) values(null)";
+    }
+    
+    private static String createOrderPrepStatement() {
+        return "INSERT INTO orderDetails (orderID, id, tableName, amount, username) "
+                + "VALUES((SELECT orderID FROM orders WHERE orderID = ?), ?, ?, ?, ?)";
     }
 }

@@ -30,6 +30,7 @@ public class Facade {
     private Hashtable shirts;
     private Hashtable gloves;
     private Hashtable users;
+    private Hashtable orders;
 
     public Facade() {
         this.cart = new ShoppingCart();
@@ -106,6 +107,14 @@ public class Facade {
         LookPants look = new LookPants();
         Hashtable table = look.getPantsWithGroup(group, con);
         this.pants = table;
+        return table;
+    }
+    
+    public Hashtable getOrders(String group, Connection con) {
+        LookOrders look = new LookOrders();
+        System.out.println("test");
+        Hashtable table = look.getOrdersWithGroup(group, con);
+        this.orders = table;
         return table;
     }
     

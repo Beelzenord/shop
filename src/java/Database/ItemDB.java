@@ -28,11 +28,6 @@ public class ItemDB extends Item {
     
     public static Collection searchItems(String group, Connection con) {
         Vector v = new Vector();
-        /*Connection con = null;
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?useSSL=false", "admin1", "admin1p");
-        } catch (SQLException ex) {
-        }*/
         Statement st = null;
         try {
             st = con.createStatement();

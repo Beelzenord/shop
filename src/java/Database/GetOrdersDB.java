@@ -5,26 +5,23 @@
  */
 package Database;
 
-import businesslogic.Shoes;
+import businesslogic.Gloves;
+import businesslogic.Orders;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Niklas
  */
-
-public class ShoesDB extends Shoes {
+public class GetOrdersDB extends Orders {
     
-    private ShoesDB(int id, String name, float price, int stock) {
-        super(id, name, price, stock);
+    private GetOrdersDB(int orderID, int id, String tableName,  int amount,  String username) {
+        super(orderID, id, tableName, amount, username);
     }
     
     public static Collection searchItems(String group, Connection con) {
@@ -36,24 +33,22 @@ public class ShoesDB extends Shoes {
         }
         ResultSet rs = null;
         try {
-            rs = st.executeQuery("select * from shoeClass");
+            rs = st.executeQuery("SELECT * FROM orderDetails ORDER BY orderID");
         } catch (SQLException ex) {
+            System.out.println("could not query");
         }
         try {
             while (rs.next()) {
-                int i = rs.getInt(1);
-                String itemName = rs.getString(2);
-                float price = rs.getFloat(3);
-                int stock = rs.getInt(4);
-                v.addElement(new ShoesDB(i, itemName, price, stock));
+                int orderID = rs.getInt(1);
+                int id = rs.getInt(2);
+                String tableName = rs.getString(3);
+                int amount = rs.getInt(4);
+                String username = rs.getString(5);
+                v.addElement(new GetOrdersDB(orderID, id, tableName, amount, username));
             }
         } catch (SQLException ex) {
+            System.out.println("could not rs");
         }
         return v;
     }
 }
-
-
-
-
-
