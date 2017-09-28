@@ -1,7 +1,8 @@
 use shop;
 
-INSERT INTO user (username, password, firstName, lastName, email) VALUES('u1', 'u1', 'u1fn', 'u1ln', 'u1email');
-INSERT INTO admin (id, username, password, firstName, lastName, email) VALUES ('1', 'a1', 'a1', 'a', 'd', 'admin');
+#INSERT INTO user (username, password, firstName, lastName, email) VALUES('u1', 'u1', 'u1fn', 'u1ln', 'u1email');
+#INSERT INTO admin (id, username, password, firstName, lastName, email) VALUES ('1', 'a1', 'a1', 'a', 'd', 'admin');
+#INSERT INTO stockstaff (username, password, firstName, lastName, email) VALUES('l1', 'l1', 'l1fn', 'l1ln', 'l1email');
 
 INSERT INTO shop.shoeClass (name, price, stock) VALUES('Puma',100, 24);
 INSERT INTO shop.shoeClass (name, price, stock) VALUES('Adidas',120, 6);

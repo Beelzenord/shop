@@ -29,7 +29,6 @@ public class LookOrders {
             Orders anewitem = (Orders)it.next();
             if (i == 0) {
                 lastOrderID = anewitem.getOrderID();
-                System.out.println("last: " + lastOrderID);
             }
                 
             Hashtable items = new Hashtable();

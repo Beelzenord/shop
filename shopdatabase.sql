@@ -2,6 +2,12 @@ CREATE DATABASE IF NOT EXISTS `shop` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 use shop;
 DROP TABLE orderDetails;
+DROP TABLE orders;
+
+CREATE TABLE IF NOT EXISTS orders (
+	`orderID` int(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (orderID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS orderDetails (
 	orderID int(11),
@@ -15,11 +21,7 @@ CREATE TABLE IF NOT EXISTS orderDetails (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS orders (
-	`orderID` int(11) NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (orderID)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+drop table glovesClass;
 CREATE TABLE IF NOT EXISTS `glovesClass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -28,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `glovesClass` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+drop table shoeClass;
 CREATE TABLE IF NOT EXISTS `shoeClass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -36,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `shoeClass` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
+drop table pantsClass;
 CREATE TABLE IF NOT EXISTS `pantsClass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -45,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `pantsClass` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+drop table shirtClass;
 CREATE TABLE IF NOT EXISTS `shirtClass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,

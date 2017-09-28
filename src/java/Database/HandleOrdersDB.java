@@ -20,7 +20,55 @@ import java.util.logging.Logger;
  *
  * @author Niklas
  */
-public class CreateOrderDB {
+public class HandleOrdersDB {
+    
+    public static boolean executeOrder(Connection con, Hashtable table, int orderID) {
+        PreparedStatement updateTables = null;
+        PreparedStatement removeOrder = null;
+        Enumeration e = table.keys();
+        try {
+            removeOrder = con.prepareStatement(createRemoveOrderPrepStatement());
+            con.setAutoCommit(false);
+            while (e.hasMoreElements()) {
+                String s = (String)e.nextElement();
+                Hashtable tmp = (Hashtable)table.get(s);
+                updateTables = con.prepareStatement(createUpdateTablesPrepStatement((String)tmp.get("tableName")));
+                updateTables.setInt(1, (int)tmp.get("amount"));
+                updateTables.setInt(2, (int)tmp.get("id"));
+                updateTables.executeUpdate();
+            }    
+            removeOrder.setInt(1, orderID);
+            removeOrder.executeUpdate();
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException ex) {
+            System.out.println("Could not execute order");
+            try {
+                con.rollback();
+                return false;
+            } catch (SQLException ex1) {
+            }
+            return false;
+        } finally {
+            try {
+                if (updateTables != null)
+                    updateTables.close();
+                if (removeOrder != null)
+                    removeOrder.close();
+            } catch (SQLException ex) {
+            }
+        }
+        return true;
+    }
+    
+    private static String createUpdateTablesPrepStatement(String table) {
+        return "UPDATE "+table+" SET stock = (stock - ?) WHERE id = ?";
+    }
+    
+    private static String createRemoveOrderPrepStatement() {
+        return "DELETE FROM orders WHERE orderID = ?";
+    }
     
     public static boolean createOrder(Connection con, Hashtable table, String username) {
         PreparedStatement pst = null;

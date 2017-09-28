@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package businesslogic;
-import Database.CreateOrderDB;
+import Database.HandleOrdersDB;
 import Database.PresentListDB;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 public class Facade {
     private static User user;
     private static Admin admin;
+    private static Stockstaff stockstaff;
     private ShoppingCart cart;
     private Hashtable shoes;
     private Hashtable pants;
@@ -125,29 +126,43 @@ public class Facade {
     }
     
     public void createOrder() {
-        CreateOrderDB.createOrder(user.getCon(), cart.getCart(), user.getUsername());
-        // uppdate shoppingcart if successful
-        cart = new ShoppingCart();
+        if (HandleOrdersDB.createOrder(user.getCon(), cart.getCart(), user.getUsername()))
+            cart = new ShoppingCart();
+    }
+    
+    public void executeOrder(int orderID) {
+        Hashtable tmp = (Hashtable)orders.get(orderID);
+        HandleOrdersDB.executeOrder(stockstaff.getCon(), tmp, orderID);
     }
     
     public static void getUserCredentials(String username,String password){
         User u = null;
         u = ValidateUser.validateClient(username, password);
         user = u;
-        //return u;
     }
     public static void getAdminCredentials(String username,String password){
         Admin a = null;
         a = ValidateUser.validateAdmin(username, password);
         admin = a;
     }
-    public static Admin getAdmin(){
-        return admin;
+    
+    public static void getStockstaffCredentials(String username,String password){
+        Stockstaff a = null;
+        a = ValidateUser.validateStockstaff(username, password);
+        stockstaff = a;
     }
     
     public static User getUser() {
         return user;
     }
+    
+    public static Admin getAdmin(){
+        return admin;
+    }
+        
+    public static Stockstaff getStockstaff(){
+        return stockstaff;
+    }    
     public void  updateUser(Connection con, User u){
         ValidateUser.updateTheUser(con, u);
     }
