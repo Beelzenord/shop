@@ -14,6 +14,7 @@
     <body>
         <h1>Administrator</h1>
         
+        
          <a href= "edituser.jsp">edit user</a>
     </body>
 </html>
