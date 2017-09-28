@@ -148,5 +148,8 @@ public class Facade {
     public static User getUser() {
         return user;
     }
+    public void  updateUser(Connection con, User u){
+        ValidateUser.updateTheUser(con, u);
+    }
    
 }

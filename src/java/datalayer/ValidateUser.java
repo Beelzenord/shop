@@ -126,4 +126,24 @@ public class ValidateUser {
         }
         
     }
+    public static void updateTheUser(Connection con, User u){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+            ps = con.prepareStatement("update user set username = ?,password = ?,firstName = ?, lastName = ?, email = ? where id = ?");
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getPassword());
+            ps.setString(3, u.getFirstName());
+            ps.setString(4, u.getLastName());
+            ps.setString(5, u.getEmail());
+            ps.setInt(6, u.getId());
+            ps.executeUpdate();
+        }
+        catch(Exception ex){
+           ex.printStackTrace();
+        }
+        
+        
+    }
 }

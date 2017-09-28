@@ -3,6 +3,7 @@
     Created on : Sep 27, 2017, 1:34:29 AM
     Author     : fauzianordlund
 --%>
+<%@page import="java.lang.String"%>
 <%@page import="businesslogic.User"%>
 <%@page import="java.util.Vector"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -18,30 +19,40 @@
     </head>
     <body>
         <h1>User Profiles</h1>
+        
         <% Facade facade = (Facade)session.getAttribute("Facade");
            Admin a = facade.getAdmin();
            Vector meine_table = facade.getUsers(a.getCon());
            //out.println(meine_table.size());
-           session.setAttribute("vector", meine_table);
+           request.setAttribute("vector", meine_table);
         //   User u = (User)meine_table.get(1);
           // out.println(u.toString());
+        
         %>
-        <form method="get" action ="updateprocessor.jsp">
+      
+              
             <% 
+            
                  for(int i = 0 ; i < meine_table.size() ; i++){
                  
                  User u = (User) meine_table.get(i);
+                 
             %>
-            ID         <input type = "text" name = "id" value ="<%= u.getId() %>" >
-           Username   <input type = "text" name = "username " value ="<%= u.getUsername() %>">
-           Password   <input type = "text" name = "password" value ="<%= u.getPassword() %>">
-           First Name <input type = "text" name = "firstName" value ="<%= u.getFirstName()%>">
-           Last  Name <input type = "text" name = "lastName"  value ="<%= u.getLastName()%>">
-              Email   <input type = "text" name = "email"  value ="<%= u.getEmail() %>">
-           <br/><br/>
-            <% } %>
-        </form>
+              <form method="get" action ="updateprocessor.jsp" scope = "session">
+           
+           Username   <input type = "text" name = "username" value ="<%= u.getUsername() %>"required>
+           Password   <input type = "text" name = "password" value ="<%= u.getPassword() %>"required>
+           First Name <input type = "text" name = "firstName" value ="<%= u.getFirstName()%>"required>
+           Last  Name <input type = "text" name = "lastName"  value ="<%= u.getLastName()%>"required>
+           Email      <input type = "text" name = "email"  value ="<%= u.getEmail() %>"required>
+           <input type="hidden" name = "marker"  value = "<%= i%>"> 
+           <input type="hidden" name ="ID" value="<%= u.getId() %>">
+           <input type="submit" value ="update">
+           <br/><br/></form>
+            <% } %>    
+           
+            
         
-       
+      
     </body>
 </html>
