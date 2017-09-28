@@ -15,7 +15,7 @@
         <h1>Administrator</h1>
         
         
-         <a href= "edituser.jsp">edit user</a>
-         <a href= "SnowOrders.jsp">edit user</a>
+        <a href= "edituser.jsp">edit user</a><br>
+        
     </body>
 </html>

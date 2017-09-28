@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 public class Facade {
     private static User user;
     private static Admin admin;
+    private static Stockstaff stockstaff;
     private ShoppingCart cart;
     private Hashtable shoes;
     private Hashtable pants;
@@ -131,26 +132,36 @@ public class Facade {
     
     public void executeOrder(int orderID) {
         Hashtable tmp = (Hashtable)orders.get(orderID);
-        HandleOrdersDB.executeOrder(user.getCon(), tmp, orderID);
+        HandleOrdersDB.executeOrder(stockstaff.getCon(), tmp, orderID);
     }
     
     public static void getUserCredentials(String username,String password){
         User u = null;
         u = ValidateUser.validateClient(username, password);
         user = u;
-        //return u;
     }
     public static void getAdminCredentials(String username,String password){
         Admin a = null;
         a = ValidateUser.validateAdmin(username, password);
         admin = a;
     }
-    public static Admin getAdmin(){
-        return admin;
+    
+    public static void getStockstaffCredentials(String username,String password){
+        Stockstaff a = null;
+        a = ValidateUser.validateStockstaff(username, password);
+        stockstaff = a;
     }
     
     public static User getUser() {
         return user;
     }
+    
+    public static Admin getAdmin(){
+        return admin;
+    }
+        
+    public static Stockstaff getStockstaff(){
+        return stockstaff;
+    }    
    
 }

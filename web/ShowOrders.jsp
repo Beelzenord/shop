@@ -38,7 +38,7 @@
             Facade facade = (Facade)session.getAttribute("Facade");
             Hashtable table = new Hashtable();
             
-                    table = facade.getOrders("orders", facade.getUser().getCon());
+                    table = facade.getOrders("orders", facade.getStockstaff().getCon());
                     float total = 0;
         %>
                     

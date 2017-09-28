@@ -10,6 +10,7 @@ GRANT SELECT, INSERT, UPDATE ON user TO 'a1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON orders TO 'a1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON orderDetails TO 'a1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON admin TO 'a1'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON stockstaff TO 'a1'@'localhost';
 
 DROP USER IF EXISTS 'u1'@'localhost';
 CREATE USER IF NOT EXISTS 'u1'@'localhost' identified BY 'u1';
@@ -17,9 +18,9 @@ GRANT SELECT ON shoeClass TO 'u1'@'localhost';
 GRANT SELECT ON shirtClass TO 'u1'@'localhost';
 GRANT SELECT ON glovesClass TO 'u1'@'localhost';
 GRANT SELECT ON pantsClass TO 'u1'@'localhost';
-GRANT SELECT, INSERT ON user TO 'u1'@'localhost';
+GRANT SELECT ON user TO 'u1'@'localhost';
 GRANT SELECT, INSERT ON orders TO 'u1'@'localhost';
-GRANT SELECT, INSERT ON orderDetails TO 'u1'@'localhost';
+GRANT INSERT ON orderDetails TO 'u1'@'localhost';
 
 DROP USER IF EXISTS 'l1'@'localhost';
 CREATE USER IF NOT EXISTS 'l1'@'localhost' identified BY 'l1';
@@ -28,6 +29,8 @@ GRANT SELECT, INSERT, UPDATE ON shirtClass TO 'l1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON glovesClass TO 'l1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON pantsClass TO 'l1'@'localhost';
 GRANT SELECT  ON user TO 'l1'@'localhost';
+GRANT SELECT ON admin TO 'l1'@'localhost';
+GRANT SELECT ON stockstaff TO 'l1'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON orders TO 'l1'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON orderDetails TO 'l1'@'localhost';
 
@@ -116,9 +119,25 @@ CREATE TABLE IF NOT EXISTS `admin` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS stockstaff;
+CREATE TABLE IF NOT EXISTS `stockstaff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `user_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 INSERT INTO user (username, password, firstName, lastName, email) VALUES('u1', 'u1', 'u1fn', 'u1ln', 'u1email');
 INSERT INTO admin (username, password, firstName, lastName, email) VALUES ('a1', 'a1', 'a1fn', 'a1ln', 'a1email');
+INSERT INTO stockstaff (username, password, firstName, lastName, email) VALUES('l1', 'l1', 'l1fn', 'l1ln', 'l1email');
 
 INSERT INTO shop.shoeClass (name, price, stock) VALUES('Puma',100, 24);
 INSERT INTO shop.shoeClass (name, price, stock) VALUES('Adidas',120, 6);

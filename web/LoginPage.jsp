@@ -19,7 +19,8 @@
             Enter the password: <input type = "password" name="password" required><br/>
             <input type="submit" value = "OK">
           </form>
-        <a href = "loginadmin.jsp">Login as staff</a>
+        <a href = "loginadmin.jsp">Login as admin</a><br>
+        <a href = "LoginStockstaff.jsp">Login as stock staff</a>
     </body>
    
 </html>
