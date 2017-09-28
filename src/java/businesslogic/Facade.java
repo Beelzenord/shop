@@ -130,6 +130,11 @@ public class Facade {
         cart = new ShoppingCart();
     }
     
+    public void executeOrder(int orderID) {
+        Hashtable tmp = (Hashtable)orders.get(orderID);
+        
+    }
+    
     public static void getUserCredentials(String username,String password){
         User u = null;
         u = ValidateUser.validateClient(username, password);

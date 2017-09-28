@@ -22,6 +22,12 @@ import java.util.logging.Logger;
  */
 public class CreateOrderDB {
     
+    public static boolean executeOrder(Connection on, Hashtable table, int orderID) {
+        PreparedStatement updateTables = null;
+        PreparedStatement removeOrder = null;
+        Enumeration e = table.keys();
+    }
+    
     public static boolean createOrder(Connection con, Hashtable table, String username) {
         PreparedStatement pst = null;
         PreparedStatement orderIdPrep = null;

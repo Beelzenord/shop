@@ -4,6 +4,7 @@
     Author     : Niklas
 --%>
 
+<%@page import="businesslogic.Facade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            Facade facade = (Facade)session.getAttribute("Facade");
+            facade.executeOrder(orderID);
+            String site = new String("ShowOrders.jsp");
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", site); 
+        %>
     </body>
 </html>
