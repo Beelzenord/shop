@@ -6,6 +6,7 @@
 package businesslogic;
 import Database.HandleOrdersDB;
 import Database.PresentListDB;
+import Database.UpdateGoodsDB;
 import datalayer.ValidateUser;
 import static java.lang.System.out;
 import java.sql.Connection;
@@ -165,6 +166,14 @@ public class Facade {
     }    
     public void  updateUser(Connection con, User u){
         ValidateUser.updateTheUser(con, u);
+    }
+    
+    public void updateGoodsInDatabase(int id, String tableName, String name, float price, int stock) {
+        UpdateGoodsDB.updateGoods(stockstaff.getCon(), id, tableName, name, price, stock);
+    }
+    
+    public void insertGoodsInDatabase(String tableName, String name, float price, int stock) {
+        UpdateGoodsDB.insertGoods(stockstaff.getCon(), tableName, name, price, stock);
     }
    
 }

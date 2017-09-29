@@ -15,7 +15,7 @@
     </head>
     <body>
             <%
-            RequestDispatcher ds = request.getRequestDispatcher("ShowOrders.jsp"); 
+            RequestDispatcher ds = request.getRequestDispatcher("StockStaffServices.jsp"); 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             Facade facade = new Facade(); // new shopping cart

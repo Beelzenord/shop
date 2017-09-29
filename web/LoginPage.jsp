@@ -5,15 +5,28 @@
     <a href = "loginadmin.jsp">Login as staff</a>
 --%>
 
+<%@page import="javafx.application.Platform"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+        
+                             
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>The login page</title>
     </head>
-    <body>
+    <body>                                 
         <h1>Welcome to the E-Shop</h1>
+                <%/*
+        new Thread() {
+            public void run() {
+                try {
+                    Platform.runLater(
+                            new Runnable() {
+                                public void run() {
+                                    //UPDATE VIEW*/
+    %>   
           <form  method ="get" action="confirm.jsp" scope ="session">
             Enter the word: <input type="text" name="username" required><br/>
             Enter the password: <input type = "password" name="password" required><br/>
@@ -21,6 +34,19 @@
           </form>
         <a href = "loginadmin.jsp">Login as admin</a><br>
         <a href = "LoginStockstaff.jsp">Login as stock staff</a>
+    <%/*
+                            }
+                        });
+            } catch (Exception ex) {
+            }
+        }
+    }.start();*/
+    %>
     </body>
-   
 </html>
+
+        
+        
+        
+        
+
