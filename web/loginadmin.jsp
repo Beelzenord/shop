@@ -15,10 +15,11 @@
     </head>
     <body>
         <h1>Login as admin</h1>
-        <form action ="confirmadmin.jsp" method = "get" scope = "session">
+        <form action ="ControllerApplication" method = "post" scope = "request">
             <input type = "text" name ="username" require><br/>
             <input type = "password" name ="password" required><br/>
             <input type = "hidden" name ="admin" value="yes">
+            <input type = "hidden" name ="usertype" value ="admin">
             <input type = "submit" value ="Submit">
         </form>
       

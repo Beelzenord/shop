@@ -5,6 +5,7 @@
  */
 package controller;
 
+import businesslogic.Admin;
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
 import businesslogic.User;
@@ -22,8 +23,9 @@ import javax.servlet.http.HttpSession;
  * @author fauzianordlund
  */
 public class ControllerApplication extends HttpServlet {
-      Facade facade;
-      User u ;
+      private Facade facade;
+      private User u ;
+      private Admin a;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -98,6 +100,13 @@ public class ControllerApplication extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String usertype = request.getParameter("usertype");
+      PrintWriter out = response.getWriter();
+      HttpSession session = request.getSession();
+       switch(usertype){
+           case "admin": doEdit(request,response); break;
+          
+          }
     }
 
     /**
@@ -111,13 +120,15 @@ public class ControllerApplication extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-            PrintWriter out = response.getWriter();
+      //  processRequest(request, response);
+       // processRequest(request, response);
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String usertype = request.getParameter("usertype");
         out.println(username + " " + password + " "+ usertype);
         processLogin(request,response,usertype,username,password);
+       
     }
     protected void processLogin(HttpServletRequest request, HttpServletResponse response, String usertype
             ,String username,String password)
@@ -138,8 +149,29 @@ public class ControllerApplication extends HttpServlet {
                            out.println("invalid");
                            }
                            break;
+            case "admin":  out.println("admin"); 
+                           facade.getAdminCredentials(username, password); 
+                           a = facade.getAdmin();              
+                           session.setAttribute("Facade", facade); // store facade in sessions
+                           rd = request.getRequestDispatcher("adminservices.jsp");
+                           if(username.equals(a.getUsername())&&password.equals(a.getPassword())){
+                           rd.forward(request, response);
+                           }    break;
             default : out.println("nothing");
         }
+    }
+    protected void doEdit(HttpServletRequest request, HttpServletResponse response){
+        int id  = Integer.parseInt(request.getParameter("ID"));
+        int    marker   = Integer.parseInt(request.getParameter("marker"));
+        HttpSession session = request.getSession();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+         String firstName = request.getParameter("firstName");                   String lastName = request.getParameter("lastName");
+        String email    = request.getParameter("email");
+        Facade fc = (Facade) session.getAttribute("Facade"); 
+        Admin a = fc.getAdmin();                 
+        User preUpdate = new User(id,username,password,firstName,lastName,email);
+        fc.updateUser(a.getCon(), preUpdate);
     }
     /**
      * Returns a short description of the servlet.
@@ -150,5 +182,5 @@ public class ControllerApplication extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+   
 }
