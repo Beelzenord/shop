@@ -28,23 +28,25 @@
                             for (int i = 0; i < (int)table.get("size"); i++) {
                                 Hashtable tmp = (Hashtable)table.get("Shoes"+i);
                         %>
-                            <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                            <form method="post" action ="ControllerApplication" scope = "session">
                             Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                             Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                             Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
                             <input type="hidden" name = "tableName"  value = "shoeClass"> 
                             <input type="hidden" name ="ID" value="<%= tmp.get("id") %>">
                             <input type="hidden" name ="action" value="update">
+                            <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                             <input type="submit" value ="Update">
                             </form><br>
                         <% } %>
-                            <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                            <form method="post" action ="ControllerApplication" scope = "session">
                             Name   <input type = "text" name = "name" value =""required>
                             Price   <input type = "text" name = "price" value =""required>
                             Stock <input type = "text" name = "stock" value =""required>
                             <input type="hidden" name = "tableName"  value = "shoeClass"> 
                             <input type="hidden" name ="ID" value="-1">
                             <input type="hidden" name ="action" value="insert">
+                            <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                             <input type="submit" value ="Create">
                             </form><br><br>
             <%            
@@ -54,23 +56,25 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Shirt"+i);
                     %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
                         <input type="hidden" name = "tableName"  value = "shirtClass"> 
                         <input type="hidden" name ="ID" value="<%= tmp.get("id") %>">
                         <input type="hidden" name ="action" value="update">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
                         <input type="hidden" name = "tableName"  value = "shirtClass"> 
                         <input type="hidden" name ="ID" value="-1">
                         <input type="hidden" name ="action" value="insert">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Create">
                         </form><br><br>
                 <%
@@ -80,23 +84,25 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Gloves"+i);
                     %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
                         <input type="hidden" name = "tableName"  value = "glovesClass"> 
                         <input type="hidden" name ="ID" value="<%= tmp.get("id") %>">
                         <input type="hidden" name ="action" value="update">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
                         <input type="hidden" name = "tableName"  value = "glovesClass"> 
                         <input type="hidden" name ="ID" value="-1">
                         <input type="hidden" name ="action" value="insert">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Create">
                         </form><br><br>
                 <%
@@ -106,23 +112,25 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Pants"+i);
                     %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
                         <input type="hidden" name = "tableName"  value = "pantsClass"> 
                         <input type="hidden" name ="ID" value="<%= tmp.get("id") %>">
                         <input type="hidden" name ="action" value="update">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="get" action ="UpdateGoodsInDatabase.jsp" scope = "session">
+                        <form method="post" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
                         <input type="hidden" name = "tableName"  value = "pantsClass"> 
                         <input type="hidden" name ="ID" value="-1">
                         <input type="hidden" name ="action" value="insert">
+                        <input type="hidden" name ="actionType" value ="UpdateGoodsInDatabase">
                         <input type="submit" value ="Create">
                         </form><br><br>
                 <% } %>

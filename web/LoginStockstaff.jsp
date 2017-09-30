@@ -13,10 +13,11 @@
     </head>
     <body>
         <h1>Login as Stockstaff</h1>
-        <form action ="ConfirmStockstaff.jsp" method = "get" scope = "session">
+        <form method ="post" action ="ControllerApplication" scope = "session">
             <input type = "text" name ="username" require><br/>
             <input type = "password" name ="password" required><br/>
             <input type = "hidden" name ="stockstaff" value="yes">
+            <input type = "hidden" name ="actionType" value ="ConfirmStockstaff">
             <input type = "submit" value ="Submit">
         </form>
       
