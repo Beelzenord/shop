@@ -7,6 +7,7 @@ package controller;
 
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
+import businesslogic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,13 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author fauzianordlund
  */
 public class ControllerApplication extends HttpServlet {
-
+      Facade facade;
+      User u ;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -109,13 +112,35 @@ public class ControllerApplication extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        PrintWriter out = response.getWriter();
+            PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String usertype = request.getParameter("usertype");
         out.println(username + " " + password + " "+ usertype);
+        processLogin(request,response,usertype,username,password);
     }
-
+    protected void processLogin(HttpServletRequest request, HttpServletResponse response, String usertype
+            ,String username,String password)
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        facade = new Facade();
+        HttpSession session = request.getSession();
+        RequestDispatcher rd;
+        switch(usertype){
+            case "client": facade.getUserCredentials(username, password);
+                           u = facade.getUser();
+                           session.setAttribute("Facade", facade); // store facade in sessions
+                           rd = request.getRequestDispatcher("mainservices.jsp");
+                           if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
+                           rd.forward(request, response);
+                           }    
+                           else{
+                           out.println("invalid");
+                           }
+                           break;
+            default : out.println("nothing");
+        }
+    }
     /**
      * Returns a short description of the servlet.
      *
