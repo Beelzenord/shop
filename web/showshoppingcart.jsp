@@ -33,7 +33,7 @@
         </style>
     </head>
     <body>
-        <a href= "getitems.jsp"> Search for Items</a><br>
+        <a href= "SearchItems.jsp"> Search for Items</a><br>
         <a href= "ShowTable.jsp"> Show Items</a><br>
         <%
             Facade facade = (Facade)session.getAttribute("Facade");
@@ -59,12 +59,13 @@
                             <td> <%= tmp.get("name")%></td> 
                             <td> <%= tmp.get("price")%></td> 
                             <td> <%= tmp.get("amount")%></td> 
-                            <form method="get" action="RemoveFromCart.jsp">
-                            </td> 
+                            <td>
+                            <form method="get" action="ControllerApplication">
                                 <input type="hidden" name="Removed" value=<%=item%>>
-                            <td> 
-                                 <input type="submit" value="Remove">
+                                <input type="hidden" name="actionType" value="RemoveFromCart">
+                                <input type="submit" value="Remove">
                             </form> 
+                            </td>
                         </tr>
                          <%  total += ((float)tmp.get("price") * (int)tmp.get("amount"));
                          } %>
@@ -73,10 +74,9 @@
                     <h3> 
                         <td> Total sum: </td> 
                         <td> <%= total%> </td>
-                        <form method="get" action="CreateOrder.jsp">
-                            <td> 
-                                 <input type="submit" value="Create Order">
-                            </td> 
+                        <form method="get" action="ControllerApplication">
+                            <input type="hidden" name="actionType" value="CreateOrder">
+                            <input type="submit" value="Create Order">
                         </form> 
                     </h3>
     </body>
