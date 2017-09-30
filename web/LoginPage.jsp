@@ -27,9 +27,10 @@
                                 public void run() {
                                     //UPDATE VIEW*/
     %>   
-          <form  method ="get" action="confirm.jsp" scope ="session">
+          <form  method ="post" action="ControllerApplication" scope ="session">
             Enter the word: <input type="text" name="username" required><br/>
             Enter the password: <input type = "password" name="password" required><br/>
+            <input type="hidden" name ="usertype" value = "client">
             <input type="submit" value = "OK">
           </form>
         <a href = "loginadmin.jsp">Login as admin</a><br>

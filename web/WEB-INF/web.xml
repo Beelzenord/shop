@@ -4,9 +4,17 @@
         <servlet-name>BusinessLogic</servlet-name>
         <servlet-class>businesslogic.BusinessLogic</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerApplication</servlet-name>
+        <servlet-class>controller.ControllerApplication</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BusinessLogic</servlet-name>
         <url-pattern>/BusinessLogic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerApplication</servlet-name>
+        <url-pattern>/ControllerApplication</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
