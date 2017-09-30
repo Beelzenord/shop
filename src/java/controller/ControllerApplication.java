@@ -23,9 +23,8 @@ import javax.servlet.http.HttpSession;
  * @author fauzianordlund
  */
 public class ControllerApplication extends HttpServlet {
-      private Facade facade;
-      private User u ;
-      private Admin a;
+      //Facade facade;
+      //User u ;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,40 +49,86 @@ public class ControllerApplication extends HttpServlet {
         if (request.getSession().getAttribute("Facade") != null)
             facade = (Facade)request.getSession().getAttribute("Facade");
             
-        String actionType = (String)request.getParameter("actionType");
-        switch(actionType) {
-            case("ConfirmAdmin"):
-                
-            case("Confirm"):
-                
-            case("ConfirmStockstaff"):
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                facade = new Facade(); // new shopping cart
-                facade.getStockstaffCredentials(username, password);  
-                Stockstaff a = facade.getStockstaff();
-                request.getSession().setAttribute("Facade", facade); // store facade in sessions
-                if(username.equals(a.getUsername())&&password.equals(a.getPassword())){
-                  rd = request.getRequestDispatcher("StockStaffServices.jsp");
-                  rd.forward(request, response);
-                }    
-            case("UpdateGoodsInDatabase"):
-                facade = (Facade)request.getSession().getAttribute("Facade"); 
-                int id = Integer.parseInt(request.getParameter("ID"));
-                String tableName = (String)request.getParameter("tableName");
-                String name = (String)request.getParameter("name");
-                float price = Float.parseFloat(request.getParameter("price"));
-                int stock = Integer.parseInt(request.getParameter("stock"));
+        if (request.getParameter("actionType") != null) {
+            String actionType = (String)request.getParameter("actionType");
+            switch(actionType) {
 
-                String action = (String)request.getParameter("action");
-                if (action.equals("update"))
-                    facade.updateGoodsInDatabase(id, tableName, name, price, stock);
-                else
-                    facade.insertGoodsInDatabase(tableName, name, price, stock);
-                  rd = request.getRequestDispatcher("EditGoodsInDatabase.jsp");
-                  rd.forward(request, response);
-            default:
-                
+                case("SearchItems"):
+                    HttpSession session = request.getSession();
+                    if (request.getParameter("Shoes") != null) 
+                        session.setAttribute("searchShoes", "Yes");
+                    else
+                        session.setAttribute("searchShoes", null);
+
+                    if (request.getParameter("Shirts") != null) 
+                        session.setAttribute("searchShirts", "Yes");
+                    else
+                        session.setAttribute("searchShirts", null);
+
+                    if (request.getParameter("Gloves") != null) 
+                        session.setAttribute("searchGloves", "Yes");
+                    else
+                        session.setAttribute("searchGloves", null);
+
+                    if (request.getParameter("Pants") != null) 
+                        session.setAttribute("searchPants", "Yes");
+                    else
+                        session.setAttribute("searchPants", null);
+                    rd = request.getRequestDispatcher("ShowTable.jsp");
+                    rd.forward(request, response);      
+                    break;
+
+                case("UpdateShoppingcart"):
+                    String target = (String)request.getParameter("Item");
+                    int amount = Integer.parseInt(request.getParameter("Amount"));
+                    facade = (Facade)request.getSession().getAttribute("Facade");
+                    facade.updateShoppingCart(target, amount);
+                    rd = request.getRequestDispatcher("ShowTable.jsp");
+                    rd.forward(request, response);
+                    break;
+                    
+                case("CreateOrder"):
+                    facade = (Facade)request.getSession().getAttribute("Facade");
+                    facade.createOrder();
+                    rd = request.getRequestDispatcher("showshoppingcart.jsp");
+                    rd.forward(request, response);
+                    break;
+                    
+                case("RemoveFromCart"):
+                    String target1 = (String)request.getParameter("Removed");
+                    facade = (Facade)request.getSession().getAttribute("Facade");
+                    facade.removeFromShoppingCart(target1);
+                    rd = request.getRequestDispatcher("showshoppingcart.jsp");
+                    rd.forward(request, response);
+                    break;
+
+                case("ExecuteOrder"):
+                    int orderID = Integer.parseInt(request.getParameter("Execute"));
+                    facade = (Facade)request.getSession().getAttribute("Facade");
+                    facade.executeOrder(orderID);
+                    rd = request.getRequestDispatcher("ShowOrders.jsp");
+                    rd.forward(request, response);
+                    break;
+
+                case("UpdateGoodsInDatabase"):
+                    facade = (Facade)request.getSession().getAttribute("Facade"); 
+                    int id = Integer.parseInt(request.getParameter("ID"));
+                    String tableName = (String)request.getParameter("tableName");
+                    String name = (String)request.getParameter("name");
+                    float price = Float.parseFloat(request.getParameter("price"));
+                    int stock = Integer.parseInt(request.getParameter("stock"));
+
+                    String action = (String)request.getParameter("action");
+                    if (action.equals("update"))
+                        facade.updateGoodsInDatabase(id, tableName, name, price, stock);
+                    else
+                        facade.insertGoodsInDatabase(tableName, name, price, stock);
+                      rd = request.getRequestDispatcher("EditGoodsInDatabase.jsp");
+                      rd.forward(request, response);
+                      break;
+                      
+                default:
+            }
         }
     }
 
@@ -120,8 +165,7 @@ public class ControllerApplication extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-       // processRequest(request, response);
+
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -134,12 +178,12 @@ public class ControllerApplication extends HttpServlet {
             ,String username,String password)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        facade = new Facade();
+        Facade facade = new Facade();
         HttpSession session = request.getSession();
         RequestDispatcher rd;
         switch(usertype){
             case "client": facade.getUserCredentials(username, password);
-                           u = facade.getUser();
+                           User u = facade.getUser();
                            session.setAttribute("Facade", facade); // store facade in sessions
                            rd = request.getRequestDispatcher("mainservices.jsp");
                            if(username.equals(u.getUsername())&&password.equals(u.getPassword())){

@@ -76,6 +76,7 @@
                         OrderID: <%=orderID%>      Username: <%=username%> 
                         <form method="get" action="ExecuteOrder.jsp">
                                 <input type="hidden" name="Execute" value=<%=orderID%>>
+                                <input type="hidden" name="actionType" value="ExecuteOrder">
                                 <input type="submit" value="Create Order">
 
                         </form> 
