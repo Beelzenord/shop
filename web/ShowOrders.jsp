@@ -33,12 +33,13 @@
     </head>
     <body>
         <a href= "SearchItems.jsp"> Search for Items</a><br>
-        <a href= "ShowTable.jsp"> Show Items</a><br><br><br>
+        <a href= "ShowTable.jsp"> Show Items</a><br>
+        <a href= "EditGoodsInDatabase.jsp">Edit goods in the Database </a><br><br><br>
         <%
             Facade facade = (Facade)session.getAttribute("Facade");
             Hashtable table = new Hashtable();
             
-                    table = facade.getOrders("orders", facade.getStockstaff().getCon());
+                    table = facade.getOrders("orders");
                     float total = 0;
         %>
                     

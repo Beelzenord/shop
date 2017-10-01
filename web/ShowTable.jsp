@@ -44,7 +44,7 @@
             User u = facade.getUser();
             Hashtable table = null;
             if (session.getAttribute("searchShoes") != null) { 
-                table = facade.getShoes("hej", u.getCon());%>
+                table = facade.getShoes("hej");%>
                 <h2>Shoes</h2>
                 <table>
                     <tr>
@@ -81,7 +81,7 @@
                 </table>
             <%}
             if (session.getAttribute("searchShirts") != null) { 
-                table = facade.getShirts("hej", u.getCon()); %>
+                table = facade.getShirts("hej"); %>
                 <h2>Shirts</h2>
                                    <table>
                     <tr>
@@ -121,7 +121,7 @@
 
 
             if (session.getAttribute("searchGloves") != null) { 
-                table = facade.getGloves("hej", u.getCon()); %>
+                table = facade.getGloves("hej"); %>
                 <h2>Gloves</h2>
                                    <table>
                     <tr>
@@ -158,7 +158,7 @@
                 </table>
             <%}
             if (session.getAttribute("searchPants") != null) { 
-                table = facade.getPants("hej", u.getCon()); %>
+                table = facade.getPants("hej"); %>
                 <h2>Pants</h2>
                                    <table>
                     <tr>

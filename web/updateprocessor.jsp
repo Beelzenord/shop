@@ -31,9 +31,8 @@
             
             Facade fc = (Facade) session.getAttribute("Facade");
             Admin a = fc.getAdmin();
-            out.println(a.getCon());
             User preUpdate = new User(id,username,password,firstName,lastName,email);
-            fc.updateUser(a.getCon(), preUpdate);
+            fc.updateUser(preUpdate);
 %>          
 <a href="edituser.jsp"> back </a> 
         

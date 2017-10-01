@@ -228,7 +228,7 @@ public class ControllerApplication extends HttpServlet {
         Facade fc = (Facade) session.getAttribute("Facade"); 
         Admin a = fc.getAdmin();                 
         User preUpdate = new User(id,username,password,firstName,lastName,email);
-        fc.updateUser(a.getCon(), preUpdate);
+        fc.updateUser(preUpdate);
     }
     /**
      * Returns a short description of the servlet.

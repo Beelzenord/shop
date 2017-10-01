@@ -18,7 +18,6 @@ public class Admin {
     private String firstName;
     private String lastName;
     private String email;
-    private Connection con;
 
     public Admin(int id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
@@ -77,17 +76,10 @@ public class Admin {
         this.email = email;
     }
 
-    public Connection getCon() {
-        return con;
-    }
-
-    public void setCon(Connection con) {
-        this.con = con;
-    }
 
     @Override
     public String toString() {
-        return "Admin{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", con=" + con + '}';
+        return "Admin{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email +'}';
     }
     
 }

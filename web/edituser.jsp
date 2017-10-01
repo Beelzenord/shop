@@ -22,7 +22,7 @@
         
         <% Facade facade = (Facade)session.getAttribute("Facade");
            Admin a = facade.getAdmin();
-           Vector meine_table = facade.getUsers(a.getCon());
+           Vector meine_table = facade.getUsers();
            //out.println(meine_table.size());
            request.setAttribute("vector", meine_table);
         //   User u = (User)meine_table.get(1);

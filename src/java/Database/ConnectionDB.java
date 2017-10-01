@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datalayer;
+package Database;
 import businesslogic.Admin;
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
@@ -23,27 +23,13 @@ import javax.sql.DataSource;
  *
  * @author fauzianordlund
  */
-public class ValidateUser {
-    
-  
-    private static Connection Connect() {
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?autoReconnect=true&useSSL=false", "root", "root");
-            System.out.println("Connection granted");
-            return con;
-        }
-     catch (SQLException ex) {
-                Logger.getLogger(ValidateUser.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-        }
-      catch (ClassNotFoundException ex) {
-            Logger.getLogger(ValidateUser.class.getName()).log(Level.SEVERE, null, ex);
-               return null;
-      }    
+public class ConnectionDB {
+    private Connection con;
+
+    public ConnectionDB() {
     }
-    public static User validateClient(String username, String password){
+    
+    public User validateClient(String username, String password){
         User u=null;
         PreparedStatement ps=null;
         Connection con = null;
@@ -68,10 +54,11 @@ public class ValidateUser {
     		System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));	
     	    }
             u = new User(id,user,pass,fname,lname,email); 
-            u.setCon(con);
+            //u.setCon(con);
+            this.con = con;
             return u;
         } catch (SQLException ex) {
-            Logger.getLogger(ValidateUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
             //con.close();
             return null;
         }
@@ -81,7 +68,7 @@ public class ValidateUser {
         }
         
     }
-    public static boolean validationOfConnection(Connection con){
+    public boolean validationOfConnection(){
         if(con!=null){
             return true;
         }
@@ -89,7 +76,7 @@ public class ValidateUser {
             return false;
         }
     }
-    public static Admin validateAdmin(String username, String password){
+    public Admin validateAdmin(String username, String password){
         Admin a=null;
         PreparedStatement ps=null;
         Connection con = null;
@@ -114,10 +101,11 @@ public class ValidateUser {
     		System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));	
     	    }
             a = new Admin(id,user,pass,fname,lname,email); 
-            a.setCon(con);
+            //a.setCon(con);
+            this.con = con;
             return a;
         } catch (SQLException ex) {
-            Logger.getLogger(ValidateUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
             //con.close();
             return null;
         }
@@ -127,7 +115,7 @@ public class ValidateUser {
         }
     }
     
-    public static Stockstaff validateStockstaff(String username, String password){
+    public Stockstaff validateStockstaff(String username, String password){
         Stockstaff a=null;
         PreparedStatement ps=null;
         Connection con = null;
@@ -152,10 +140,11 @@ public class ValidateUser {
     		System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));	
     	    }
             a = new Stockstaff(id,user,pass,fname,lname,email); 
-            a.setCon(con);
+            //a.setCon(con);
+            this.con = con;
             return a;
         } catch (SQLException ex) {
-            Logger.getLogger(ValidateUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
             //con.close();
             return null;
         }
@@ -165,7 +154,7 @@ public class ValidateUser {
         }
         
     }
-    public static void updateTheUser(Connection con, User u){
+    public void updateTheUser(User u){
         PreparedStatement ps = null;
         ResultSet rs = null;
         
@@ -182,8 +171,12 @@ public class ValidateUser {
         catch(Exception ex){
            ex.printStackTrace();
         }
-        
-        
     }
+
+    public Connection getCon() {
+        return con;
+    }
+    
+    
     
 }

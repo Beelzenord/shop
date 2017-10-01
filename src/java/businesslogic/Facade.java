@@ -7,7 +7,7 @@ package businesslogic;
 import Database.HandleOrdersDB;
 import Database.PresentListDB;
 import Database.UpdateGoodsDB;
-import datalayer.ValidateUser;
+import Database.ConnectionDB;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,6 +28,7 @@ public class Facade {
     private static User user;
     private static Admin admin;
     private static Stockstaff stockstaff;
+    private ConnectionDB dbcon;
     private ShoppingCart cart;
     private Hashtable shoes;
     private Hashtable pants;
@@ -38,6 +39,7 @@ public class Facade {
 
     public Facade() {
         this.cart = new ShoppingCart();
+        this.dbcon = new ConnectionDB();
     }
     
     public void updateShoppingCart(String target, int amount) {
@@ -58,9 +60,8 @@ public class Facade {
             cart.addNewElement(target, (int)tmp.get("id"), (String)tmp.get("name"), (float)tmp.get("price"), amount);
         }
     }
-    public Vector getUsers(Connection con){
-      
-       users = PresentListDB.createOrder(con);
+    public Vector getUsers(){
+       users = PresentListDB.createOrder(dbcon.getCon());
        return users;
     } 
     public void removeFromShoppingCart(String target) {
@@ -83,74 +84,74 @@ public class Facade {
         this.cart = cart;
     }
     
-    public static Hashtable getItems(String group, Connection con) {
+    public Hashtable getItems(String group) {
         LookItems look = new LookItems();
-        Hashtable table = look.getItemsWithGroup(group, con);
+        Hashtable table = look.getItemsWithGroup(group, dbcon.getCon());
         System.out.println("table: " + table.toString());
         return table;
     }
     
-    public Hashtable getShoes(String group, Connection con) {
+    public Hashtable getShoes(String group) {
         LookShoes look = new LookShoes();
-        Hashtable table = look.getShoesWithGroup(group, con);
+        Hashtable table = look.getShoesWithGroup(group, dbcon.getCon());
         this.shoes = table;
         return table;
     }
     
-    public Hashtable getShirts(String group, Connection con) {
+    public Hashtable getShirts(String group) {
         LookShirts look = new LookShirts();
-        Hashtable table = look.getShirtWithGroup(group, con);
+        Hashtable table = look.getShirtWithGroup(group, dbcon.getCon());
         this.shirts = table;
         return table;
     }
         
-    public Hashtable getGloves(String group, Connection con) {
+    public Hashtable getGloves(String group) {
         LookGloves look = new LookGloves();
-        Hashtable table = look.getGlovesWithGroup(group, con);
+        Hashtable table = look.getGlovesWithGroup(group, dbcon.getCon());
         this.gloves = table;
         return table;
     }
         
-    public Hashtable getPants(String group, Connection con) {
+    public Hashtable getPants(String group) {
         LookPants look = new LookPants();
-        Hashtable table = look.getPantsWithGroup(group, con);
+        Hashtable table = look.getPantsWithGroup(group, dbcon.getCon());
         this.pants = table;
         return table;
     }
     
-    public Hashtable getOrders(String group, Connection con) {
+    public Hashtable getOrders(String group) {
         LookOrders look = new LookOrders();
         System.out.println("test");
-        Hashtable table = look.getOrdersWithGroup(group, con);
+        Hashtable table = look.getOrdersWithGroup(group, dbcon.getCon());
         this.orders = table;
         return table;
     }
     
     public void createOrder() {
-        if (HandleOrdersDB.createOrder(user.getCon(), cart.getCart(), user.getUsername()))
+        if (HandleOrdersDB.createOrder(dbcon.getCon(), cart.getCart(), user.getUsername()))
             cart = new ShoppingCart();
     }
     
     public void executeOrder(int orderID) {
         Hashtable tmp = (Hashtable)orders.get(orderID);
-        HandleOrdersDB.executeOrder(stockstaff.getCon(), tmp, orderID);
+        HandleOrdersDB.executeOrder(dbcon.getCon(), tmp, orderID);
     }
     
-    public static void getUserCredentials(String username,String password){
+    public void getUserCredentials(String username,String password){
         User u = null;
-        u = ValidateUser.validateClient(username, password);
+        u = dbcon.validateClient(username, password);
         user = u;
     }
-    public static void getAdminCredentials(String username,String password){
+    public void getAdminCredentials(String username,String password){
         Admin a = null;
-        a = ValidateUser.validateAdmin(username, password);
+        a = dbcon.validateAdmin(username, password);
         admin = a;
     }
     
-    public static void getStockstaffCredentials(String username,String password){
-        Stockstaff a = null;
-        a = ValidateUser.validateStockstaff(username, password);
-        stockstaff = a;
+    public void getStockstaffCredentials(String username,String password){
+        Stockstaff s = null;
+        s = dbcon.validateStockstaff(username, password);
+        stockstaff = s;
     }
     
     public static User getUser() {
@@ -164,16 +165,16 @@ public class Facade {
     public static Stockstaff getStockstaff(){
         return stockstaff;
     }    
-    public void  updateUser(Connection con, User u){
-        ValidateUser.updateTheUser(con, u);
+    public void  updateUser(User u){
+        dbcon.updateTheUser(u);
     }
     
     public void updateGoodsInDatabase(int id, String tableName, String name, float price, int stock) {
-        UpdateGoodsDB.updateGoods(stockstaff.getCon(), id, tableName, name, price, stock);
+        UpdateGoodsDB.updateGoods(dbcon.getCon(), id, tableName, name, price, stock);
     }
     
     public void insertGoodsInDatabase(String tableName, String name, float price, int stock) {
-        UpdateGoodsDB.insertGoods(stockstaff.getCon(), tableName, name, price, stock);
+        UpdateGoodsDB.insertGoods(dbcon.getCon(), tableName, name, price, stock);
     }
    
 }

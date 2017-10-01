@@ -15,6 +15,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href= "SearchItems.jsp"> Search for Items</a><br>
+        <a href= "ShowTable.jsp"> Show Items</a><br>
+        <a href= "ShowOrders.jsp">Show Orders </a><br><br><br>
         <h1>Edit goods in the database</h1>
         <%
             Facade facade = (Facade)session.getAttribute("Facade");
@@ -22,7 +25,7 @@
             Hashtable table = new Hashtable();
             for (int k = 0; k < 1; k++) {
                 table = null;
-                    table = facade.getShoes("hej", staff.getCon());%>
+                    table = facade.getShoes("hej");%>
                     <h2>Shoes</h2>
                         <%
                             for (int i = 0; i < (int)table.get("size"); i++) {
@@ -50,7 +53,7 @@
                             <input type="submit" value ="Create">
                             </form><br><br>
             <%            
-                table = facade.getShirts("hej", staff.getCon()); %>
+                table = facade.getShirts("hej"); %>
                 <h2>Shirts</h2>
                     <%
                         for (int i = 0; i < (int)table.get("size"); i++) {
@@ -78,7 +81,7 @@
                         <input type="submit" value ="Create">
                         </form><br><br>
                 <%
-                table = facade.getGloves("hej", staff.getCon()); %>
+                table = facade.getGloves("hej"); %>
                 <h2>Gloves</h2>
                     <%
                         for (int i = 0; i < (int)table.get("size"); i++) {
@@ -106,7 +109,7 @@
                         <input type="submit" value ="Create">
                         </form><br><br>
                 <%
-                table = facade.getPants("hej", staff.getCon()); %>
+                table = facade.getPants("hej"); %>
                 <h2>Pants</h2>
                     <%
                         for (int i = 0; i < (int)table.get("size"); i++) {
