@@ -188,7 +188,7 @@
                         <td> 
                              <input type="submit" value="Add to Cart">
                             </form> 
-                        </td>
+                        </td>  
                     </tr>
                     <% } %>
 

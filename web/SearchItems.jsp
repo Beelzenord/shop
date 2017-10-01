@@ -17,7 +17,7 @@
     <body>
         <a href= "showshoppingcart.jsp"> Show Shoppingcart</a>
         <h1> Checkmark the items you want to find </h2>
-        <form method=get action = "ControllerApplication">
+        <form method="get" action = "ControllerApplication">
         <input type="checkbox" name="Shoes" value="Yes">Shoes<br>
         <input type="checkbox" name="Shirts" value="Yes">Shirts<br>
         <input type="checkbox" name="Gloves" value="Yes">Gloves<br>

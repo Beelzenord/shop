@@ -28,7 +28,7 @@
                             for (int i = 0; i < (int)table.get("size"); i++) {
                                 Hashtable tmp = (Hashtable)table.get("Shoes"+i);
                         %>
-                            <form method="post" action ="ControllerApplication" scope = "session">
+                            <form method="get" action ="ControllerApplication" scope = "session">
                             Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                             Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                             Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
@@ -39,7 +39,7 @@
                             <input type="submit" value ="Update">
                             </form><br>
                         <% } %>
-                            <form method="post" action ="ControllerApplication" scope = "session">
+                            <form method="get" action ="ControllerApplication" scope = "session">
                             Name   <input type = "text" name = "name" value =""required>
                             Price   <input type = "text" name = "price" value =""required>
                             Stock <input type = "text" name = "stock" value =""required>
@@ -56,7 +56,7 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Shirt"+i);
                     %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
@@ -67,7 +67,7 @@
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
@@ -84,7 +84,7 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Gloves"+i);
                     %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
@@ -95,7 +95,7 @@
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
@@ -112,7 +112,7 @@
                         for (int i = 0; i < (int)table.get("size"); i++) {
                             Hashtable tmp = (Hashtable)table.get("Pants"+i);
                     %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value ="<%= tmp.get("name") %>"required>
                         Price   <input type = "text" name = "price" value ="<%= tmp.get("price") %>"required>
                         Stock <input type = "text" name = "stock" value ="<%= tmp.get("stock") %>"required>
@@ -123,7 +123,7 @@
                         <input type="submit" value ="Update">
                         </form><br>
                     <% } %>
-                        <form method="post" action ="ControllerApplication" scope = "session">
+                        <form method="get" action ="ControllerApplication" scope = "session">
                         Name   <input type = "text" name = "name" value =""required>
                         Price   <input type = "text" name = "price" value =""required>
                         Stock <input type = "text" name = "stock" value =""required>
