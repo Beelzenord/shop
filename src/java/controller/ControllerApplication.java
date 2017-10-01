@@ -9,6 +9,7 @@ import businesslogic.Admin;
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
 import businesslogic.User;
+import datalayer.ValidateUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -225,6 +226,7 @@ public class ControllerApplication extends HttpServlet {
         String firstName = request.getParameter("firstName");                   
         String lastName = request.getParameter("lastName");
         String email    = request.getParameter("email");
+        
         Facade fc = (Facade) session.getAttribute("Facade"); 
         Admin a = fc.getAdmin();                 
         User preUpdate = new User(id,username,password,firstName,lastName,email);
