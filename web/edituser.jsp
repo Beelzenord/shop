@@ -23,31 +23,21 @@
         <% Facade facade = (Facade)session.getAttribute("Facade");
            Admin a = facade.getAdmin();
            Vector meine_table = facade.getUsers();
-           //out.println(meine_table.size());
            request.setAttribute("vector", meine_table);
-        //   User u = (User)meine_table.get(1);
-          // out.println(u.toString());
-        
-        %>
-      
-              
-            <% 
-            
-                 for(int i = 0 ; i < meine_table.size() ; i++){
-                 
-                 User u = (User) meine_table.get(i);
-                 
+            for(int i = 0 ; i < meine_table.size() ; i++){
+            User u = (User) meine_table.get(i);
             %>
-              <form method="get" action ="updateprocessor.jsp" scope = "session">
-           
-           Username   <input type = "text" name = "username" value ="<%= u.getUsername() %>"required>
-           Password   <input type = "text" name = "password" value ="<%= u.getPassword() %>"required>
-           First Name <input type = "text" name = "firstName" value ="<%= u.getFirstName()%>"required>
-           Last  Name <input type = "text" name = "lastName"  value ="<%= u.getLastName()%>"required>
-           Email      <input type = "text" name = "email"  value ="<%= u.getEmail() %>"required>
-           <input type="hidden" name = "marker"  value = "<%= i%>"> 
-           <input type="hidden" name ="ID" value="<%= u.getId() %>">
-           <input type="submit" value ="update">
+            
+           <form method="post" action ="ControllerApplication" scope = "session">
+            Username   <input type = "text" name = "username" value ="<%= u.getUsername() %>"required>
+            Password   <input type = "text" name = "password" value ="<%= u.getPassword() %>"required>
+            First Name <input type = "text" name = "firstName" value ="<%= u.getFirstName()%>"required>
+            Last  Name <input type = "text" name = "lastName"  value ="<%= u.getLastName()%>"required>
+            Email      <input type = "text" name = "email"  value ="<%= u.getEmail() %>"required>
+            <input type="hidden" name = "marker"  value = "<%= i%>"> 
+            <input type="hidden" name ="ID" value="<%= u.getId() %>">
+            <input type="hidden" name ="updateuser" value="updateuser">
+            <input type="submit" value ="update">
            <br/><br/></form>
             <% } %>    
            

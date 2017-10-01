@@ -206,8 +206,5 @@ public class Facade {
     public void insertGoodsInDatabase(String tableName, String name, float price, int stock) {
         UpdateGoodsDB.insertGoods(dbcon.getCon(), tableName, name, price, stock);
     }
-    public void doGrant(User u, Connection con){
-        ValidateUser.issueGrant(u, con);
-    }
    
 }

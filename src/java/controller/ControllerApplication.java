@@ -9,7 +9,6 @@ import businesslogic.Admin;
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
 import businesslogic.User;
-import datalayer.ValidateUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -78,44 +77,33 @@ public class ControllerApplication extends HttpServlet {
                 else
                     session.setAttribute("searchPants", null);
                 response.sendRedirect("ShowTable.jsp");
-                /*rd = request.getRequestDispatcher("ShowTable.jsp");
-                rd.forward(request, response);*/
                 break;
 
             case("UpdateShoppingcart"):
                 String target = (String)request.getParameter("Item");
                 int amount = Integer.parseInt(request.getParameter("Amount"));
-                facade = (Facade)request.getSession().getAttribute("Facade");
                 facade.updateShoppingCart(target, amount);
-                rd = request.getRequestDispatcher("ShowTable.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("ShowTable.jsp");
                 break;
 
             case("CreateOrder"):
-                facade = (Facade)request.getSession().getAttribute("Facade");
                 facade.createOrder();
-                rd = request.getRequestDispatcher("showshoppingcart.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("showshoppingcart.jsp");
                 break;
 
             case("RemoveFromCart"):
                 String target1 = (String)request.getParameter("Removed");
-                facade = (Facade)request.getSession().getAttribute("Facade");
                 facade.removeFromShoppingCart(target1);
-                rd = request.getRequestDispatcher("showshoppingcart.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("showshoppingcart.jsp");
                 break;
 
             case("ExecuteOrder"):
                 int orderID = Integer.parseInt(request.getParameter("Execute"));
-                facade = (Facade)request.getSession().getAttribute("Facade");
                 facade.executeOrder(orderID);
-                rd = request.getRequestDispatcher("ShowOrders.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("ShowOrders.jsp");
                 break;
 
             case("UpdateGoodsInDatabase"):
-                facade = (Facade)request.getSession().getAttribute("Facade"); 
                 int id = Integer.parseInt(request.getParameter("ID"));
                 String tableName = (String)request.getParameter("tableName");
                 String name = (String)request.getParameter("name");
@@ -127,13 +115,11 @@ public class ControllerApplication extends HttpServlet {
                     facade.updateGoodsInDatabase(id, tableName, name, price, stock);
                 else
                     facade.insertGoodsInDatabase(tableName, name, price, stock);
-                rd = request.getRequestDispatcher("EditGoodsInDatabase.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("EditGoodsInDatabase.jsp");
                 break;
 
             default:
-                rd = request.getRequestDispatcher("LoginPage.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("LoginPage.jsp");
         }
     }
 
@@ -166,6 +152,8 @@ public class ControllerApplication extends HttpServlet {
         
         if (request.getParameter("usertype") != null)
             processLogin(request,response);
+        if (request.getParameter("updateuser") != null)
+            doEdit(request, response);
     }
     
     protected void processLogin(HttpServletRequest request, HttpServletResponse response)
@@ -213,11 +201,10 @@ public class ControllerApplication extends HttpServlet {
                 break;
                 
             default: 
-                rd = request.getRequestDispatcher("LoginPage.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("LoginPage.jsp");
         }
     }
-    protected void doEdit(HttpServletRequest request, HttpServletResponse response){
+    protected void doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException{
         int id  = Integer.parseInt(request.getParameter("ID"));
         int    marker   = Integer.parseInt(request.getParameter("marker"));
         HttpSession session = request.getSession();
@@ -231,6 +218,7 @@ public class ControllerApplication extends HttpServlet {
         Admin a = fc.getAdmin();                 
         User preUpdate = new User(id,username,password,firstName,lastName,email);
         fc.updateUser(preUpdate);
+        response.sendRedirect("edituser.jsp");
     }
     /**
      * Returns a short description of the servlet.
