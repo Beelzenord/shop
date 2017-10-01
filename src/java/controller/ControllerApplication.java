@@ -11,6 +11,9 @@ import businesslogic.Stockstaff;
 import businesslogic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -73,8 +76,9 @@ public class ControllerApplication extends HttpServlet {
                     session.setAttribute("searchPants", "Yes");
                 else
                     session.setAttribute("searchPants", null);
-                rd = request.getRequestDispatcher("ShowTable.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("ShowTable.jsp");
+                /*rd = request.getRequestDispatcher("ShowTable.jsp");
+                rd.forward(request, response);*/
                 break;
 
             case("UpdateShoppingcart"):
@@ -145,13 +149,6 @@ public class ControllerApplication extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String usertype = request.getParameter("usertype");
-      PrintWriter out = response.getWriter();
-      HttpSession session = request.getSession();
-       switch(usertype){
-           case "admin": doEdit(request,response); break;
-          
-          }
     }
 
     /**
@@ -165,10 +162,11 @@ public class ControllerApplication extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         if (request.getParameter("usertype") != null)
             processLogin(request,response);
-       
     }
+    
     protected void processLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
