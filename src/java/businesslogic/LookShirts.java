@@ -20,6 +20,10 @@ public class LookShirts {
     public LookShirts() {
     }
     
+    /**
+     * Puts items retrieved from the database in a Hashtable where each item 
+     * is its own Hashtable
+     */
     public Hashtable getShirtWithGroup(String group, Connection con) {
         Collection c = Shirt.searchItems(group, con);
         Hashtable t = new Hashtable();

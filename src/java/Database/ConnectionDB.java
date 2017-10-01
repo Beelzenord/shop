@@ -29,6 +29,9 @@ public class ConnectionDB {
     public ConnectionDB() {
     }
     
+    /**
+     * Check if a user exists in the database and retrieves a Connection with said users privileges 
+     */
     public User validateClient(String username, String password){
         User u=null;
         PreparedStatement ps=null;
@@ -76,6 +79,10 @@ public class ConnectionDB {
             return false;
         }
     }
+    
+    /**
+     * Check if an admin exists in the database and retrieves a Connection with said admins privileges 
+     */
     public Admin validateAdmin(String username, String password){
         Admin a=null;
         PreparedStatement ps=null;
@@ -115,6 +122,9 @@ public class ConnectionDB {
         }
     }
     
+    /**
+     * Check if a stockstaff exists in the database and retrieves a Connection with said stockstaffs privileges 
+     */
     public Stockstaff validateStockstaff(String username, String password){
         Stockstaff a=null;
         PreparedStatement ps=null;
@@ -154,6 +164,10 @@ public class ConnectionDB {
         }
         
     }
+    
+    /**
+     * Updates a user in the database, ex. username, password, email
+     */
     public void updateTheUser(User u){
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -173,10 +187,11 @@ public class ConnectionDB {
         }
     }
 
+    /**
+     * Returns the Connection of the connected login
+     */
     public Connection getCon() {
         return con;
     }
-    
-    
     
 }

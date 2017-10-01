@@ -19,7 +19,10 @@ public class LookPants {
     public LookPants() {
     }
     
-        
+    /**
+     * Puts items retrieved from the database in a Hashtable where each item 
+     * is its own Hashtable
+     */
     public Hashtable getPantsWithGroup(String group, Connection con) {
         Collection c = Pants.searchItems(group, con);
         Hashtable t = new Hashtable();

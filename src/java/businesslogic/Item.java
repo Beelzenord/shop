@@ -19,9 +19,6 @@ public class Item {
     private String name;
     private float price;
     private int stock;
-    /*static public Collection searchItems(String group, Connection con) {
-        return ItemDB.searchItems(group, con);
-    }*/
 
     public Item(int id, String name, float price, int stock) {
         this.id = id;

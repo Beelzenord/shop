@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * The Facade handles logic between the view and the database, also logic within the session ex. updating the shopping cart
  * @author fauzianordlund
  */
 public class Facade {
@@ -42,6 +42,11 @@ public class Facade {
         this.dbcon = new ConnectionDB();
     }
     
+    /**
+     * Puts an item into the shopping cart, 
+     * @param target the type of item, shoes, shirts etc.
+     * @param amount the amount of items to buy
+     */
     public void updateShoppingCart(String target, int amount) {
         if (target.contains("Shoes")) {
             Hashtable tmp = (Hashtable)shoes.get(target);
@@ -68,9 +73,6 @@ public class Facade {
         cart.removeElement(target);
     }
     
-    public static String example(){
-       return "this will connect to a database";
-    }
     public static Connection isValid(Connection con){
         //con = null;
         return con;
@@ -127,27 +129,45 @@ public class Facade {
         return table;
     }
     
+    /**
+     * User sends an order to the database to be executed by staff
+     */
     public void createOrder() {
         if (HandleOrdersDB.createOrder(dbcon.getCon(), cart.getCart(), user.getUsername()))
             cart = new ShoppingCart();
     }
     
+    /**
+     * A Stockstaff executes an order made by a user. This will update item tuples in the database and
+     * remove the order executed from the database. 
+     * @param orderID 
+     */
     public void executeOrder(int orderID) {
         Hashtable tmp = (Hashtable)orders.get(orderID);
         HandleOrdersDB.executeOrder(dbcon.getCon(), tmp, orderID);
     }
     
+    /**
+     * Check if a user exists in the database and retrieves a Connection with said users privileges 
+     */
     public void getUserCredentials(String username,String password){
         User u = null;
         u = dbcon.validateClient(username, password);
         user = u;
     }
+    
+    /**
+     * Check if an admin exists in the database and retrieves a Connection with said admins privileges 
+     */
     public void getAdminCredentials(String username,String password){
         Admin a = null;
         a = dbcon.validateAdmin(username, password);
         admin = a;
     }
     
+    /**
+     * Check if a stockstaff exists in the database and retrieves a Connection with said stockstaffs privileges 
+     */
     public void getStockstaffCredentials(String username,String password){
         Stockstaff s = null;
         s = dbcon.validateStockstaff(username, password);
@@ -165,14 +185,24 @@ public class Facade {
     public static Stockstaff getStockstaff(){
         return stockstaff;
     }    
+    
+    /**
+     * Updates a user in the database, ex. username, password email
+     */
     public void  updateUser(User u){
         dbcon.updateTheUser(u);
     }
     
+    /**
+     * Updates tuples of items in the database, ex. name, price
+     */
     public void updateGoodsInDatabase(int id, String tableName, String name, float price, int stock) {
         UpdateGoodsDB.updateGoods(dbcon.getCon(), id, tableName, name, price, stock);
     }
     
+    /**
+     * Inserts new goods in the database, ex. new shoes, shirt
+     */
     public void insertGoodsInDatabase(String tableName, String name, float price, int stock) {
         UpdateGoodsDB.insertGoods(dbcon.getCon(), tableName, name, price, stock);
     }

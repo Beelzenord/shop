@@ -19,6 +19,10 @@ public class LookOrders {
     public LookOrders() {
     }
     
+    /**
+     * Gets orders from the database to a Hashtable containing all order and
+     * which instructions the orders should execute. 
+     */
     public Hashtable getOrdersWithGroup(String group, Connection con) {
         Collection c = Orders.searchItems(group, con);
         Hashtable q = new Hashtable();

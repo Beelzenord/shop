@@ -19,6 +19,10 @@ public class LookShoes {
     public LookShoes() {
     }
     
+    /**
+     * Puts items retrieved from the database in a Hashtable where each item 
+     * is its own Hashtable
+     */
     public Hashtable getShoesWithGroup(String s, Connection con) {
         Collection c = Shoes.searchItems(s, con);
         Hashtable t = new Hashtable();
