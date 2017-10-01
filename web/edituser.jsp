@@ -1,8 +1,10 @@
 <%-- 
     Document   : edituser
     Created on : Sep 27, 2017, 1:34:29 AM
-    Author     : fauzianordlund
+    Author     : fauzianordlund Membership <input type= "text" name  = "member" value=" <%= ValidateUser.returnUserName(a.getCon(), u.getUsername()) %>" >
+      <%= (u.getUsername().equals("u1") ? "checked" : "") %>     
 --%>
+<%@page import="datalayer.ValidateUser"%>
 <%@page import="java.lang.String"%>
 <%@page import="businesslogic.User"%>
 <%@page import="java.util.Vector"%>
@@ -36,7 +38,7 @@
                  for(int i = 0 ; i < meine_table.size() ; i++){
                  
                  User u = (User) meine_table.get(i);
-                 
+                 String temp = ValidateUser.returnUserName(a.getCon(), u.getUsername());
             %>
               <form method="get" action ="updateprocessor.jsp" scope = "session">
            
@@ -45,11 +47,15 @@
            First Name <input type = "text" name = "firstName" value ="<%= u.getFirstName()%>"required>
            Last  Name <input type = "text" name = "lastName"  value ="<%= u.getLastName()%>"required>
            Email      <input type = "text" name = "email"  value ="<%= u.getEmail() %>"required>
+           temp       <input type ="text"  name = "temp" value =" <%= ValidateUser.returnUserName(a.getCon(), u.getUsername()) %> ">
+           Authorized <input type="checkbox" name="grant" value="granted" <%= (u.getUsername().equals(ValidateUser.returnUserName(a.getCon(), u.getUsername())) ? "checked" : "")%>>
            <input type="hidden" name = "marker"  value = "<%= i%>"> 
            <input type="hidden" name ="ID" value="<%= u.getId() %>">
            <input type="submit" value ="update">
            <br/><br/></form>
-            <% } %>    
+            <% } 
+            
+            %>    
            
             
         
