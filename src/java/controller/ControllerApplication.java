@@ -9,6 +9,7 @@ import businesslogic.Admin;
 import businesslogic.Facade;
 import businesslogic.Stockstaff;
 import businesslogic.User;
+import datalayer.ValidateUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -186,16 +187,18 @@ public class ControllerApplication extends HttpServlet {
                            User u = facade.getUser();
                            session.setAttribute("Facade", facade); // store facade in sessions
                            rd = request.getRequestDispatcher("mainservices.jsp");
-                           if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
+                           String proof = ValidateUser.returnUserName(u.getCon(), u.getUsername());
+                           out.println("proof " + proof);
+                           /*if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
                            rd.forward(request, response);
                            }    
                            else{
                            out.println("invalid");
-                           }
+                           }*/
                            break;
             case "admin":  out.println("admin"); 
                            facade.getAdminCredentials(username, password); 
-                           a = facade.getAdmin();              
+                           Admin a = facade.getAdmin();              
                            session.setAttribute("Facade", facade); // store facade in sessions
                            rd = request.getRequestDispatcher("adminservices.jsp");
                            if(username.equals(a.getUsername())&&password.equals(a.getPassword())){
@@ -212,6 +215,7 @@ public class ControllerApplication extends HttpServlet {
         String password = request.getParameter("password");
          String firstName = request.getParameter("firstName");                   String lastName = request.getParameter("lastName");
         String email    = request.getParameter("email");
+        
         Facade fc = (Facade) session.getAttribute("Facade"); 
         Admin a = fc.getAdmin();                 
         User preUpdate = new User(id,username,password,firstName,lastName,email);
