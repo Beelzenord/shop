@@ -17,7 +17,7 @@
             <input type = "text" name ="username" require><br/>
             <input type = "password" name ="password" required><br/>
             <input type = "hidden" name ="stockstaff" value="yes">
-            <input type = "hidden" name ="actionType" value ="ConfirmStockstaff">
+            <input type = "hidden" name ="usertype" value ="stockstaff">
             <input type = "submit" value ="Submit">
         </form>
       

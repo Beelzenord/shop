@@ -18,7 +18,7 @@
     
     
         <%
-                 String user=request.getParameter("username");
+                 /*String user=request.getParameter("username");
                  String pass=request.getParameter("password");
                  out.println(user);
                  out.println(pass);
@@ -38,7 +38,7 @@
                  }
                  else{
                      out.println("sd");
-                 }
+                 }*/
                 
             %>
     </body>

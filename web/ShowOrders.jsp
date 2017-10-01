@@ -32,13 +32,14 @@
         </style>
     </head>
     <body>
-        <a href= "getitems.jsp"> Search for Items</a><br>
-        <a href= "ShowTable.jsp"> Show Items</a><br><br><br>
+        <a href= "SearchItems.jsp"> Search for Items</a><br>
+        <a href= "ShowTable.jsp"> Show Items</a><br>
+        <a href= "EditGoodsInDatabase.jsp">Edit goods in the Database </a><br><br><br>
         <%
             Facade facade = (Facade)session.getAttribute("Facade");
             Hashtable table = new Hashtable();
             
-                    table = facade.getOrders("orders", facade.getStockstaff().getCon());
+                    table = facade.getOrders("orders");
                     float total = 0;
         %>
                     
@@ -74,10 +75,10 @@
                     </table>
                     <h3> 
                         OrderID: <%=orderID%>      Username: <%=username%> 
-                        <form method="get" action="ExecuteOrder.jsp">
+                        <form method="get" action="ControllerApplication">
                                 <input type="hidden" name="Execute" value=<%=orderID%>>
                                 <input type="hidden" name="actionType" value="ExecuteOrder">
-                                <input type="submit" value="Create Order">
+                                <input type="submit" value="Execute Order">
 
                         </form> 
                     </h3><br><br>

@@ -19,7 +19,6 @@ public class Stockstaff {
     private String firstName;
     private String lastName;
     private String email;
-    private Connection con;
 
     public Stockstaff(int id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
@@ -78,17 +77,9 @@ public class Stockstaff {
         this.email = email;
     }
 
-    public Connection getCon() {
-        return con;
-    }
-
-    public void setCon(Connection con) {
-        this.con = con;
-    }
-
     @Override
     public String toString() {
-        return "Stockstaff{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", con=" + con + '}';
+        return "Stockstaff{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email+ '}';
     }
     
 }

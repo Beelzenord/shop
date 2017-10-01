@@ -18,15 +18,6 @@
     </head>
     <body>                                 
         <h1>Welcome to the E-Shop</h1>
-                <%/*
-        new Thread() {
-            public void run() {
-                try {
-                    Platform.runLater(
-                            new Runnable() {
-                                public void run() {
-                                    //UPDATE VIEW*/
-    %>   
           <form  method ="post" action="ControllerApplication" scope ="session">
             Enter the word: <input type="text" name="username" required><br/>
             Enter the password: <input type = "password" name="password" required><br/>
@@ -35,14 +26,6 @@
           </form>
         <a href = "loginadmin.jsp">Login as admin</a><br>
         <a href = "LoginStockstaff.jsp">Login as stock staff</a>
-    <%/*
-                            }
-                        });
-            } catch (Exception ex) {
-            }
-        }
-    }.start();*/
-    %>
     </body>
 </html>
 

@@ -18,7 +18,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private Connection con;
     public User(){
         
     }
@@ -84,29 +83,19 @@ public class User {
         this.password = password;
     }
 
-    public Connection getCon() {
-        return con;
-    }
 
-    public void setCon(Connection con) {
-        this.con = con;
-    }
-
-    /*  public void initConection(){
-        this.con = Facade.isValid(con);
-    }*/
-    public boolean isUserConnected(){
+    /*public boolean isUserConnected(){
         if(this.con!=null){
             return true;
         }
         else{
             return false;
         }
-    }
+    }*/
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", con=" + con + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email +'}';
     }
     
 }
