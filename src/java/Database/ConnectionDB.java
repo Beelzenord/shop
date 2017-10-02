@@ -175,15 +175,10 @@ public class ConnectionDB {
      */
     public void updateTheUser(String username, User u){
         PreparedStatement ps = null;
-        PreparedStatement psReplace = null;
-        PreparedStatement psChangePassword = null;
         ResultSet rs = null;
-        
         
         try{
             ps = con.prepareStatement("update user set username = ?,password = ?,firstName = ?, lastName = ?, email = ? where id = ?");
-            psReplace = con.prepareStatement("RENAME mysql.USER '" + username+ "'@'localhost' TO '" + u.getUsername() + "'@'localhost'");
-            psChangePassword = con.prepareStatement("SET PASSWORD FOR ? @'localhost' = ?");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());
             ps.setString(3, u.getFirstName());
@@ -191,14 +186,7 @@ public class ConnectionDB {
             ps.setString(5, u.getEmail());
             ps.setInt(6, u.getId());
             
-            //psReplace.setString(1, u.getUsername());
-            
-            psChangePassword.setString(1, u.getUsername());
-            psChangePassword.setString(2, u.getPassword());
             ps.executeUpdate();
-            psReplace.executeUpdate();
-            psChangePassword.executeUpdate();
-            
         }
         catch(Exception ex){
            ex.printStackTrace();
