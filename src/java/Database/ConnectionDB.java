@@ -46,7 +46,7 @@ public class ConnectionDB {
         try {
              Class.forName("com.mysql.jdbc.Driver");
 
-                con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false",username,password);
+                con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false","u1","u1");
  
             ps = con.prepareStatement("select * from user where username=? and password=?");
             ps.setString(1, username);
@@ -55,11 +55,16 @@ public class ConnectionDB {
             if(rs.next()){ 		// id                    username             pass                     fn                       ln                      
     		id = rs.getInt(1); user = rs.getString(2);pass = rs.getString(3);fname= rs.getString(4); lname= rs.getString(5);email = rs.getString(6);
     		System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));	
-    	    }
-            u = new User(id,user,pass,fname,lname,email); 
-            //u.setCon(con);
-            this.con = con;
-            return u;
+    	        u = new User(id,user,pass,fname,lname,email); 
+                this.con = con;
+                return u;
+            }
+            else{
+                this.con = null;
+                return null;
+            }
+            
+          
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
             //con.close();
@@ -97,7 +102,7 @@ public class ConnectionDB {
         try {
              Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false",username,password);
  
             ps = con.prepareStatement("select * from admin where username=? and password=?");
             ps.setString(1, username);
@@ -139,7 +144,7 @@ public class ConnectionDB {
         try {
              Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/shop?autoReconnect=true&useSSL=false",username,password);
  
             ps = con.prepareStatement("select * from stockstaff where username=? and password=?");
             ps.setString(1, username);
@@ -168,19 +173,32 @@ public class ConnectionDB {
     /**
      * Updates a user in the database, ex. username, password, email
      */
-    public void updateTheUser(User u){
+    public void updateTheUser(String username, User u){
         PreparedStatement ps = null;
+        PreparedStatement psReplace = null;
+        PreparedStatement psChangePassword = null;
         ResultSet rs = null;
+        
         
         try{
             ps = con.prepareStatement("update user set username = ?,password = ?,firstName = ?, lastName = ?, email = ? where id = ?");
+            psReplace = con.prepareStatement("RENAME mysql.USER '" + username+ "'@'localhost' TO '" + u.getUsername() + "'@'localhost'");
+            psChangePassword = con.prepareStatement("SET PASSWORD FOR ? @'localhost' = ?");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());
             ps.setString(3, u.getFirstName());
             ps.setString(4, u.getLastName());
             ps.setString(5, u.getEmail());
             ps.setInt(6, u.getId());
+            
+            //psReplace.setString(1, u.getUsername());
+            
+            psChangePassword.setString(1, u.getUsername());
+            psChangePassword.setString(2, u.getPassword());
             ps.executeUpdate();
+            psReplace.executeUpdate();
+            psChangePassword.executeUpdate();
+            
         }
         catch(Exception ex){
            ex.printStackTrace();

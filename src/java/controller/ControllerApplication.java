@@ -11,6 +11,7 @@ import businesslogic.Stockstaff;
 import businesslogic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -171,11 +172,13 @@ public class ControllerApplication extends HttpServlet {
                 User u = facade.getUser();
                 session.setAttribute("Facade", facade); // store facade in sessions
                 rd = request.getRequestDispatcher("mainservices.jsp");
-                if(username.equals(u.getUsername())&&password.equals(u.getPassword())){
+               if(u!= null){
                     rd.forward(request, response);
                 }    
                 else{
-                    out.println("invalid");
+                    rd = request.getRequestDispatcher("LoginPage.jsp");
+                    rd.forward(request, response);
+                    out.println("invalid login details");
                 }
                 break;
                 
@@ -185,9 +188,14 @@ public class ControllerApplication extends HttpServlet {
                 Admin a = facade.getAdmin();              
                 session.setAttribute("Facade", facade); // store facade in sessions
                 rd = request.getRequestDispatcher("adminservices.jsp");
-                if(username.equals(a.getUsername())&&password.equals(a.getPassword())){
+               if(a!= null){
                     rd.forward(request, response);
-                }    
+                }
+               else{
+                    rd = request.getRequestDispatcher("LoginPage.jsp");
+                    rd.forward(request, response);
+                    out.println("invalid login details");
+                 }
                 break;
                            
             case "stockstaff":  
@@ -195,9 +203,14 @@ public class ControllerApplication extends HttpServlet {
                 Stockstaff s = facade.getStockstaff();              
                 session.setAttribute("Facade", facade); // store facade in sessions
                 rd = request.getRequestDispatcher("StockstaffServices.jsp");
-                if(username.equals(s.getUsername())&&password.equals(s.getPassword())){
+                if(s!= null){
                     rd.forward(request, response);
-                }    
+                }
+                else{
+                    rd = request.getRequestDispatcher("LoginPage.jsp");
+                    rd.forward(request, response);
+                    out.println("invalid login details");
+                 }
                 break;
                 
             default: 
@@ -205,6 +218,7 @@ public class ControllerApplication extends HttpServlet {
         }
     }
     protected void doEdit(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        PrintWriter out = response.getWriter();
         int id  = Integer.parseInt(request.getParameter("ID"));
         int    marker   = Integer.parseInt(request.getParameter("marker"));
         HttpSession session = request.getSession();
@@ -214,10 +228,13 @@ public class ControllerApplication extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email    = request.getParameter("email");
         
-        Facade fc = (Facade) session.getAttribute("Facade"); 
+        Facade fc = (Facade) session.getAttribute("Facade");
+        Vector tempUsers = fc.getUsers();
+        User oldUser = (User)tempUsers.get(marker);
         Admin a = fc.getAdmin();                 
         User preUpdate = new User(id,username,password,firstName,lastName,email);
-        fc.updateUser(preUpdate);
+        fc.updateUser(oldUser.getUsername(),preUpdate);
+        out.println(oldUser.toString());
         response.sendRedirect("edituser.jsp");
     }
     /**

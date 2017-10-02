@@ -189,8 +189,8 @@ public class Facade {
     /**
      * Updates a user in the database, ex. username, password email
      */
-    public void  updateUser(User u){
-        dbcon.updateTheUser(u);
+    public void  updateUser(String username, User u){
+        dbcon.updateTheUser(username,u);
     }
     
     /**
